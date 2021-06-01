@@ -6,6 +6,7 @@ name = "pypi"
 [packages]
 pycryptodome = "*"
 keymanager = {editable = true, path = "./src/KeyManager"}
+arrow = "*"
 
 [dev-packages]
 
