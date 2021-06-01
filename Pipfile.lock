@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "4e29e77ef642ab1b5d7ef488599dfd75c1ab7a08604ed258b01c7b7db955a66e"
+            "sha256": "3d51f961990da11eb74086e6b57a549742be35f9fe665ea44613474a264a39ed"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -16,6 +16,10 @@
         ]
     },
     "default": {
+        "keymanager": {
+            "editable": true,
+            "path": "./src/KeyManager"
+        },
         "pycryptodome": {
             "hashes": [
                 "sha256:09c1555a3fa450e7eaca41ea11cd00afe7c91fef52353488e65663777d8524e0",
