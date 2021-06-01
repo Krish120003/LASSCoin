@@ -1,6 +1,6 @@
 import datetime
 from hashlib import sha256
-import libs.KeyManager as km
+import KeyManager as km
 
 class TransactionBlock:
     def __init__(self, height, previous_hash, sender_address, target_address, value, signature):
