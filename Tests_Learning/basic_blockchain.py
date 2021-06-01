@@ -81,13 +81,13 @@ class BlockChain:
         self.current_block = self.current_block.next_block
 
         starting_time = time.perf_counter()
-        for i in (range(self.starts[self.current_block.number - 1]-1, self.max_nonce), leave=False, desc=f"Hashing Block #{self.current_block.number}"):
+        for i in range(self.starts[self.current_block.number - 1]-1, self.max_nonce):
             if int(self.current_block.hash(), 16) < self.target:
                 break
             else:
                 self.current_block.nonce = i
-        if self.verbose:
-            print(f"Block #{self.current_block.number} | Nonce {str(self.current_block.nonce).ljust(7)} | Hash {self.current_block.hash()} | Time {int((time.perf_counter() - starting_time))} seconds")
+            if self.verbose:
+                print(f"Block #{self.current_block.number} | Nonce {str(self.current_block.nonce).ljust(7)} | Hash {self.current_block.hash()} | Time {int((time.perf_counter() - starting_time))} seconds", end = "\r")
 
         return self.current_block.nonce
 
