@@ -1,5 +1,6 @@
 import arrow
 from hashlib import sha256
+from . import Context
 
 
 class TransactionBlock:
@@ -12,17 +13,11 @@ class TransactionBlock:
         self.height = height
         self.previous_hash = previous_hash
 
-        self.sender_address = sender_address
-        self.target_address = target_address
-        self.transaction_value = value
-        self.signature = signature
+        self.context = Context(sender_address, target_address, value, signature)
 
-        self.verify_signature()
+        self.context.verify()
 
     def create_context(self):
-        pass
-
-    def verify_signature(self):
         pass
 
     def hash(self):
