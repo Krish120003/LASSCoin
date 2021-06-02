@@ -51,6 +51,7 @@ class TransactionBlock:
 
         self.height = height
         self.previous_hash = previous_hash
+        self.miner = None
 
         self.context = Context(sender_address, target_address, value, signature)
 
@@ -71,6 +72,7 @@ class TransactionBlock:
             "timestamp": int(self.timestamp.timestamp()),
             "height": self.height,
             "previous_hash": self.previous_hash,
+            "miner": self.miner,
         } | context
         return data
 
