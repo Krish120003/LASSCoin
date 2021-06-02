@@ -20,7 +20,7 @@ Window {
         height: 294
         anchors.top: parent.top
         source: "assets/coin.svg"
-        anchors.topMargin: 48
+        anchors.topMargin: 40
         antialiasing: true
         mirror: false
         mipmap: true
@@ -136,8 +136,8 @@ Window {
                 Column {
                     id: column2
                     anchors.fill: parent
-                    anchors.topMargin: 24
-                    spacing: 0
+                    anchors.topMargin: 12
+                    spacing: 2
 
                     Rectangle {
                         id: loadWallet
