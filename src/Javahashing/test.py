@@ -1,6 +1,6 @@
 from hashlib import sha256
 import time
-DIFFICULTY = 6
+DIFFICULTY = 1
 PREFIX = "0"*DIFFICULTY
 
 previoushash = "0000047810ddbee0ae74f89fc09791ce0fd5ed4cf0926934790f545b32f8f592"
