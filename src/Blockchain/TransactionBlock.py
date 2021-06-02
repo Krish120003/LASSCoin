@@ -26,11 +26,13 @@ class TransactionBlock:
         # self.context.verify()
 
     def hash(self):
-        pass
+        h = sha256()
+        h.update(str(self.export_block()).encode("utf-8"))
+        return h.hexdigest()
 
     def export_block(self):
         # Transaction Info
-        context = self.context.__dict__
+        context = dict(self.context.__dict__)  # wrap in dict for deep copy
         context.pop("_ctx")
         # Block Info
         data = {
