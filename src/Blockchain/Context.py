@@ -6,7 +6,7 @@ class Context:
         self.sender = sender
         self.target = target
         self.amount = amount
-        self.sign = sign
+        self.signature = sign
 
         self._ctx = {"sender": sender, "target": target, "amount": amount}
 
