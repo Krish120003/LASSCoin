@@ -1,4 +1,4 @@
-import java.math.BigInteger;
+import java.math.BigInteger;        //import BigInteger; used for verylarge ints
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
