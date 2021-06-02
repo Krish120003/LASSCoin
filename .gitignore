@@ -138,6 +138,5 @@ cython_debug/
 .vscode
 *.pdf
 tempCodeRunnerFile.java
-*.chain
 *.qtds
 *.autosave
