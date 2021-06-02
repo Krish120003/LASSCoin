@@ -140,3 +140,4 @@ cython_debug/
 tempCodeRunnerFile.java
 *.chain
 *.qtds
+*.autosave
