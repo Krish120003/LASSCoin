@@ -5,11 +5,13 @@ from Crypto.Hash import SHA256
 import os
 import base64
 
+
 def generate(nbits):
     '''
     Simple wrapper to generate an RSA key.
     '''
     return RSA.generate(nbits)
+
 
 def save_key(key, path):
     '''
@@ -17,6 +19,7 @@ def save_key(key, path):
     '''
     with open(os.path.join(path, "private.key"), "wb") as f:
         f.write(key.export_key())
+
 
 def load_key(path):
     '''
@@ -31,6 +34,7 @@ def load_key(path):
         raise Exception("Invalid Key or File Not Found")
     return key
 
+
 def encode(data):
     '''
     Encode binary data into a string
@@ -38,12 +42,14 @@ def encode(data):
     '''
     return base64.b64encode(data)
 
+
 def decode(data):
     '''
     Decode a string to binary data
     using base64 encoding.
     '''
     return base64.b64decode(data)
+
 
 def sign(priv_key, message):
     '''
@@ -53,6 +59,7 @@ def sign(priv_key, message):
     signer = pkcs1_15.new(priv_key)
     signature = signer.sign(hash)
     return encode(signature)
+
 
 def verify(public_key, message, signature):
     '''
@@ -65,4 +72,3 @@ def verify(public_key, message, signature):
         return True
     except (ValueError, TypeError):
         return False
-

@@ -2,6 +2,7 @@ import datetime
 from hashlib import sha256
 import time
 
+
 class Block:
     def __init__(self, number, previous_hash, data):
         self.nonce = 0
@@ -50,6 +51,7 @@ class Block:
         output += "+"*40 + "\n"
         return output
 
+
 class BlockChain:
 
     def __init__(self, intensity=15, verbose=True, starts=[0, 0, 0, 0, 0, 0, 0]):
@@ -87,12 +89,13 @@ class BlockChain:
             else:
                 self.current_block.nonce = i
             if self.verbose:
-                print(f"Block #{self.current_block.number} | Nonce {str(self.current_block.nonce).ljust(7)} | Hash {self.current_block.hash()} | Time {int((time.perf_counter() - starting_time))} seconds", end = "\r")
+                print(f"Block #{self.current_block.number} | Nonce {str(self.current_block.nonce).ljust(7)} | Hash {self.current_block.hash()} | Time {int((time.perf_counter() - starting_time))} seconds", end="\r")
 
         return self.current_block.nonce
 
     def set_verbose(self, value):
         self.verbose = value
+
 
 if __name__ == "__main__":
 

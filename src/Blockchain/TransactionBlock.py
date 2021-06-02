@@ -1,6 +1,7 @@
 import arrow
 from hashlib import sha256
 
+
 class TransactionBlock:
     def __init__(self, height, previous_hash, sender_address, target_address, value, signature):
         self.nonce = 0
