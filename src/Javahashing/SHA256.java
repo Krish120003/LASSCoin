@@ -13,8 +13,7 @@ class SHA256 {
         Long blocknumber = 5L;
         String bn = String.valueOf(blocknumber);
         int nonce = 0;
-        int difficulty = 1;
-        String prefixzero = "0";
+        String prefixzero = "0000";
         
         
         for (int i = 0; i <= max_nonce; i++){
@@ -23,18 +22,21 @@ class SHA256 {
                 
                 String n = String.valueOf(nonce);
                 String text = bn + previoushash + n;
+                //System.out.println("EASFSDF " + text);
                 String newhash = toHexString(getSHA(text));
 
-                System.out.println(newhash); 
-                System.out.println(nonce);
-                System.out.println(n);
-                nonce++;
-
-                if (text.startsWith(prefixzero)){
-                    System.out.println("we got the hash its: " + newhash);
+                //System.out.println(newhash); 
+                //System.out.println(nonce);
+                //System.out.println(n);
+                //break;
+                
+                System.out.print(n + " | " + newhash + "\r");
+                if (newhash.startsWith(prefixzero)){
+                    System.out.println("\nwe got the hash its: " + newhash);
                     System.exit(0);
                 }
-        
+                nonce++;
+    
             } 
             catch (NoSuchAlgorithmException e) { 
                 System.out.println("Exception thrown for incorrect algorithm: " + e); 
@@ -46,16 +48,19 @@ class SHA256 {
     { 
         // Static getInstance method is called with hashing SHA-256 
         MessageDigest md = MessageDigest.getInstance("SHA-256"); 
+
+        md.update(input.getBytes());
   
         // digest() method called to calculate message digest of an input and return byte array
-        return md.digest(input.getBytes(StandardCharsets.UTF_8)); 
+        return md.digest(); 
     }
     
     public static String toHexString(byte[] hash)
     {
-        // Convert byte array into signum representation 
-        BigInteger number = new BigInteger(1, hash); 
-  
+        
+        BigInteger number = new BigInteger(1, hash);
+        return String.format("%064X", number);
+        /*
         // Convert message digest into hex value 
         StringBuilder hexString = new StringBuilder(number.toString(16)); 
   
@@ -65,7 +70,6 @@ class SHA256 {
             hexString.insert(0, '0'); 
         } 
   
-        return hexString.toString(); 
-    }
-  
+        return hexString.toString();*/
+    } 
 }
