@@ -32,20 +32,20 @@ class BlockChain:
     def create(difficulty=1):
         chain = BlockChain(clamp(difficulty, 63, 1))
         # Create genesis block
-        chain.blocks.append((GenesisBlock(), None))
+        chain.blocks.append(GenesisBlock())
         return chain
 
     def add_block(self, block, miner=None):
         assert isinstance(block, TransactionBlock)
         assert block.height == len(self.blocks)
-
+        block.miner = miner
         self.blocks.sort(key=lambda block: block.height)
         for i in range(self.max_nonce):
             # Hash Block
             hash = block.hash()
             if hash.startswith(self.target):
                 # Nonce found
-                self.blocks.append((block, miner))
+                self.blocks.append(block)
                 return
 
             # Increase Nonce
