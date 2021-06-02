@@ -1,9 +1,10 @@
-# This Python file uses the following encoding: utf-8
 import sys
 import os
 
 from PySide2.QtGui import QGuiApplication
 from PySide2.QtQml import QQmlApplicationEngine
+from PySide2.QtCore import QObject, QTimer, Slot, Signal
+
 
 import logging
 import coloredlogs
@@ -15,6 +16,12 @@ logging.basicConfig(
 )
 
 coloredlogs.install(level="INFO")
+
+
+class QtAppInterface(QObject):
+    def __init__(self):
+        QObject.__init__(self)
+
 
 if __name__ == "__main__":
     app = QGuiApplication(sys.argv)
