@@ -4,6 +4,37 @@ from .Context import Context
 
 
 class TransactionBlock:
+    """
+    A class used to for represent
+    transactions as blocks in blockchains
+
+    ...
+
+    Attributes
+    ----------
+    nonce : int
+
+    timestamp : arrow datetime object
+        Stores the timestamp of the block
+
+    height : int
+        Stores the height of the block
+
+    context : Context
+        Stores the transaction context
+
+    previous_hash : str
+        Stores the previous hash of the block
+
+    Methods
+    -------
+    hash()
+        hashes the block
+
+    export_block()
+        exports the block to a dict
+    """
+
     def __init__(
         self,
         height,
