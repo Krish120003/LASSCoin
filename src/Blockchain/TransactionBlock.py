@@ -5,10 +5,18 @@ from .Context import Context
 
 class TransactionBlock:
     def __init__(
-        self, height, previous_hash, sender_address, target_address, value, signature
+        self,
+        height,
+        previous_hash,
+        sender_address,
+        target_address,
+        value,
+        signature,
+        nonce=None,
+        timestamp=None,
     ):
-        self.nonce = 0
-        self.timestamp = arrow.now()
+        self.nonce = nonce if nonce else 0
+        self.timestamp = arrow.get(timestamp) if timestamp else arrow.now()
 
         self.height = height
         self.previous_hash = previous_hash
@@ -20,7 +28,7 @@ class TransactionBlock:
     def hash(self):
         pass
 
-    def as_dict(self):
+    def export_block(self):
         # Transaction Info
         context = self.context.__dict__
         context.pop("_ctx")
@@ -32,3 +40,19 @@ class TransactionBlock:
             "previous_hash": self.previous_hash,
         } | context
         return data
+
+
+def load_block(data):
+    try:
+        block = TransactionBlock(
+            data["height"],
+            data["previous_hash"],
+            data["sender"],
+            data["target"],
+            data["amount"],
+            data["signature"],
+            data["nonce"],
+            data["timestamp"],
+        )
+    except KeyError:
+        raise Exception("Incomplete Block Data.")
