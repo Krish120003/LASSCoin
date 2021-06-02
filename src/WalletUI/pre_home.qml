@@ -84,7 +84,7 @@ Window {
             spacing: 4
 
             Rectangle {
-                id: loadBlockChainButton
+                id: loadBC
                 height: parent.height / 4 - parent.spacing / 4
 
                 color: "#ffdd80"
@@ -96,7 +96,7 @@ Window {
                 anchors.rightMargin: 0
 
                 Text {
-                    id: loadBlockChainButtonText
+                    id: loadBCText
                     text: qsTr("Load Blockchain")
                     anchors.fill: parent
                     horizontalAlignment: Text.AlignHCenter
@@ -105,7 +105,7 @@ Window {
                 }
 
                 MouseArea {
-                    id: loadBCmouseArea
+                    id: loadBCButton
                     anchors.fill: parent
                     hoverEnabled: true
                     onEntered: {
@@ -118,7 +118,7 @@ Window {
             }
 
             Item {
-                id: item1
+                id: container
                 height: 200
                 anchors.left: parent.left
                 anchors.right: parent.right
@@ -126,6 +126,90 @@ Window {
                 anchors.bottomMargin: 0
                 anchors.rightMargin: 0
                 anchors.leftMargin: 0
+
+                Column {
+                    id: column2
+                    anchors.fill: parent
+                    anchors.topMargin: 24
+                    spacing: 0
+
+                    Rectangle {
+                        id: loadWallet
+                        height: loadBC.height
+                        color: "#ffdd80"
+                        radius: 16
+                        border.width: 0
+                        anchors.left: parent.left
+                        anchors.right: parent.right
+                        anchors.leftMargin: 0
+                        anchors.rightMargin: 0
+                        Text {
+                            id: loadWalletText
+                            text: qsTr("Load Wallet")
+                            anchors.fill: parent
+                            font.pixelSize: 24
+                            horizontalAlignment: Text.AlignHCenter
+                            verticalAlignment: Text.AlignVCenter
+                        }
+
+                        MouseArea {
+                            id: loadWalletButton
+                            anchors.fill: parent
+                            hoverEnabled: true
+                            onEntered: {
+                                parent.color = "#ffd254"
+                            }
+                            onExited: {
+                                parent.color = "#ffdd80"
+                            }
+                        }
+                    }
+
+                    Text {
+                        id: walletOrText
+                        color: "#8c8c8c"
+                        text: qsTr("OR")
+                        anchors.left: parent.left
+                        anchors.right: parent.right
+                        font.pixelSize: 16
+                        horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment: Text.AlignVCenter
+                        anchors.rightMargin: 0
+                        anchors.leftMargin: 0
+                    }
+
+                    Rectangle {
+                        id: createWallet
+                        height: loadBC.height
+                        color: "#ffdd80"
+                        radius: 16
+                        border.width: 0
+                        anchors.left: parent.left
+                        anchors.right: parent.right
+                        anchors.leftMargin: 0
+                        anchors.rightMargin: 0
+                        Text {
+                            id: createWalletText
+                            text: qsTr("Create Wallet")
+                            anchors.fill: parent
+                            font.pixelSize: 24
+                            horizontalAlignment: Text.AlignHCenter
+                            verticalAlignment: Text.AlignVCenter
+                        }
+
+                        MouseArea {
+                            id: createWalletButton
+                            anchors.fill: parent
+                            hoverEnabled: true
+                            onEntered: {
+                                parent.color = "#ffd254"
+                            }
+                            onExited: {
+                                parent.color = "#ffdd80"
+                            }
+                        }
+                    }
+                }
             }
         }
     }
@@ -133,7 +217,8 @@ Window {
 
 /*##^##
 Designer {
-    D{i:0;formeditorZoom:0.75}D{i:1}D{i:3}D{i:4}D{i:9}D{i:7}D{i:10}D{i:6}D{i:5}
+    D{i:0;formeditorZoom:0.75}D{i:1}D{i:3}D{i:4}D{i:2;invisible:true}D{i:9}D{i:7}D{i:16}
+D{i:11}D{i:10}D{i:6}D{i:5}
 }
 ##^##*/
 
