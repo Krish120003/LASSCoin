@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "c87175e74c2c71321caab9dd8be04b3b18ca59d54c2e693715efb626000ab108"
+            "sha256": "0b19cb56108adaa93b9d10338ec47bb8060b67318ca3fcfefa4711828c3271e8"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -23,6 +23,10 @@
             ],
             "index": "pypi",
             "version": "==1.1.0"
+        },
+        "blockchain": {
+            "editable": true,
+            "path": "./src/Blockchain"
         },
         "keymanager": {
             "editable": true,
