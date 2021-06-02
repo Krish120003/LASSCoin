@@ -13,7 +13,7 @@ class SHA256 {
         Long blocknumber = 5L;
         String bn = String.valueOf(blocknumber);
         int nonce = 0;
-        String prefixzero = "0000";
+        String prefixzero = "000000";
         
         
         for (int i = 0; i <= max_nonce; i++){
@@ -29,8 +29,10 @@ class SHA256 {
                 //System.out.println(nonce);
                 //System.out.println(n);
                 //break;
-                
-                System.out.print(n + " | " + newhash + "\r");
+                if (i % 500000 == 0) {
+                     System.out.print(n + " | " + newhash + "\r");
+                }
+               
                 if (newhash.startsWith(prefixzero)){
                     System.out.println("\nwe got the hash its: " + newhash);
                     System.exit(0);
