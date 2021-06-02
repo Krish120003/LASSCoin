@@ -31,24 +31,47 @@ Window {
         sourceSize.height: parent.height // This line is important
     }
 
-    Text {
-        id: coinName
-        x: 238
-        text: qsTr("LASSCoin")
-        elide: Text.ElideNone
+    Item {
         anchors.top: parent.top
-        font.pixelSize: 45
-        horizontalAlignment: Text.AlignHCenter
-        font.bold: true
-        font.family: "Verdana"
-        anchors.topMargin: 364
+        anchors.topMargin: 365
         anchors.horizontalCenter: parent.horizontalCenter
+        anchors.left: parent.left
+        anchors.right: parent.right
+        id: title
+        x: 131
+        y: 364
+        width: 500
+        height: 102
+
+        Text {
+            id: coinName
+            x: 238
+            text: qsTr("LASSCoin")
+            anchors.top: parent.top
+            font.pixelSize: 45
+            horizontalAlignment: Text.AlignHCenter
+            anchors.topMargin: 0
+            anchors.horizontalCenter: parent.horizontalCenter
+            font.bold: true
+            font.family: "Verdana"
+        }
+
+        Text {
+            id: walletText
+            x: 238
+            text: qsTr("Wallet")
+            anchors.top: coinName.bottom
+            font.pixelSize: 24
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.topMargin: 5
+            font.family: "Verdana"
+        }
     }
 }
 
 /*##^##
 Designer {
-    D{i:0;formeditorZoom:0.75}D{i:1}D{i:2}
+    D{i:0;formeditorZoom:0.75}D{i:1}D{i:3}D{i:4}
 }
 ##^##*/
 
