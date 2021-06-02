@@ -1,6 +1,7 @@
 import QtQuick 2.12
 import QtQuick.Window 2.15
 import QtQuick.Controls 2.15
+import QtQuick.Dialogs 1.0
 
 Window {
     id: window
@@ -12,6 +13,7 @@ Window {
     maximumWidth: 500
     visible: true
     title: qsTr("LASSCoin Wallet")
+
 
     Image {
         id: coinLogo
@@ -120,6 +122,24 @@ Window {
                             parent.color = "#ffdd80"
                         }
                     }
+                    onClicked: {
+                        openBCDialog.visible = true;
+                    }
+                }
+
+
+                FileDialog {
+                    id: openBCDialog
+                    visible: false
+                    title: "Open Blockchain File"
+                    folder: shortcuts.home
+                    nameFilters: ["LASSCoin Chain Files (*.chain)"]
+                    onAccepted: {
+                        backend.loadChain(openBCDialog.fileUrls)
+                    }
+                    onRejected: {
+                        // Do nothing
+                    }
                 }
             }
 
@@ -219,12 +239,15 @@ Window {
             }
         }
     }
+
+    Connections {
+        target: backend
+    }
 }
 
 /*##^##
 Designer {
-    D{i:0;formeditorZoom:0.75}D{i:1}D{i:3}D{i:4}D{i:2;invisible:true}D{i:9}D{i:7}D{i:16}
-D{i:11}D{i:10}D{i:6}D{i:5}
+    D{i:0;formeditorZoom:0.75}D{i:3}
 }
 ##^##*/
 

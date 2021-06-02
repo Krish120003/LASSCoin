@@ -22,11 +22,18 @@ class QtAppInterface(QObject):
     def __init__(self):
         QObject.__init__(self)
 
+    @Slot(str)
+    def loadChain(self, path):
+        print(path)
+
 
 if __name__ == "__main__":
     app = QGuiApplication(sys.argv)
     engine = QQmlApplicationEngine()
     engine.load(os.path.join(os.path.dirname(__file__), "pre_home.qml"))
+
+    main = QtAppInterface()
+    engine.rootContext().setContextProperty("backend", main)
 
     if not engine.rootObjects():
         sys.exit(-1)
