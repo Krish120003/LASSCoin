@@ -95,6 +95,8 @@ Window {
                 anchors.leftMargin: 0
                 anchors.rightMargin: 0
 
+                property bool done: false
+
                 Text {
                     id: loadBCText
                     text: qsTr("Load Blockchain")
@@ -109,10 +111,14 @@ Window {
                     anchors.fill: parent
                     hoverEnabled: true
                     onEntered: {
-                        parent.color = "#ffd254"
+                        if (!parent.done) {
+                            parent.color = "#ffd254"
+                        }
                     }
                     onExited: {
-                        parent.color = "#ffdd80"
+                        if (!parent.done) {
+                            parent.color = "#ffdd80"
+                        }
                     }
                 }
             }
