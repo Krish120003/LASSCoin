@@ -26,15 +26,10 @@ class SHA256 {
                 String newhash = toHexString(getSHA(text)); // hashes the text and converts it to a hex string to be
                                                             // stored as a data type
 
-                // System.out.println(newhash);
-                // System.out.println(nonce);
-                // System.out.println(n);
-                // break;
-                // if (i % 500000 == 0) {S
+
                 System.out.print(n + " | " + newhash + "\r"); // prints every 500000th hash and nonce, to optimize the
                                                               // speed as printing a lot slows it down
                                                               // carriage return stops the console from being flooded
-                // }
 
                 // checks if the hased text starts with the desired # of zero's, and prints the
                 // hash, then exits the program
