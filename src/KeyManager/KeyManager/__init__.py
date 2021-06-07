@@ -65,6 +65,9 @@ def verify(public_key, message, signature):
     """
     Verify a message's integrity using a signature.
     """
+    if type(public_key) == str:
+        public_key = RSA.import_key(_parse_public_key(public_key))
+    
     verifier = pkcs1_15.new(public_key)
     hash = SHA256.new(message.encode("utf-8"))
     try:
@@ -72,3 +75,8 @@ def verify(public_key, message, signature):
         return True
     except (ValueError, TypeError):
         return False
+
+def _parse_public_key(line):
+    y = [line[i:i+64] for i in range(0, len(line), 64)]
+    return "\n".join(["-----BEGIN PUBLIC KEY-----", *y, "-----END PUBLIC KEY-----"])
+
