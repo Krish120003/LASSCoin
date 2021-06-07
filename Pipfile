@@ -10,6 +10,8 @@ arrow = "*"
 pyside2 = "==5.15.2"
 blockchain = {editable = true, path = "./src/Blockchain"}
 coloredlogs = "*"
+fastapi = "*"
+uvicorn = "*"
 
 [dev-packages]
 black = "*"
@@ -21,3 +23,4 @@ python_version = "3.9"
 allow_prereleases = true
 
 [scripts]
+start = "uvicorn src.API.app:app"
