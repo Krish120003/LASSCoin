@@ -18,3 +18,5 @@ class TransactionBlock(db.Model):
     sender_address = db.Column(db.String(64), nullable=False)
     target_address = db.Column(db.String(64), nullable=False)
     signature = db.Column(db.String(), nullable=False)
+
+    transaction_amount = db.Column(db.Float(), nullable=False)
