@@ -1,18 +1,12 @@
 from fastapi import FastAPI
-from pydantic import BaseModel
 import uvicorn
+
+from models import CreateTransactionContext
 
 app = FastAPI()
 
-@app.get("/")
-def read_root():
-    return {"Hello": "World"}
-
-class Test(BaseModel):
-    name: str
-
 @app.post("/api/transactions/")
-def create_transaction(x: Test):
+def create_transaction(x: CreateTransactionContext):
     print(x)
     return {}
 
