@@ -1,1 +1,1 @@
-web: uvicorn src.API.app:app
+web: uvicorn src.API.app:app --port $PORT
