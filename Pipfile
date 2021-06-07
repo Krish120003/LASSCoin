@@ -12,6 +12,8 @@ blockchain = {editable = true, path = "./src/Blockchain"}
 coloredlogs = "*"
 flask = "*"
 gunicorn = "*"
+flask-cors = "*"
+flask-sqlalchemy = "*"
 
 [dev-packages]
 black = "*"
