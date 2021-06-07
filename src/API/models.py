@@ -12,4 +12,4 @@ class CreateTransactionContext(BaseModel):
         msg = f'{values.get("sender")}|{values.get("target")}|{values.get("value"):.15f}'
         if not verify(values.get("sender"), msg, v):
             raise ValueError("Invalid Signature")
-        return
+        return v
