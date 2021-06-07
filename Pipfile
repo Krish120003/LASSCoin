@@ -10,10 +10,6 @@ arrow = "*"
 pyside2 = "==5.15.2"
 blockchain = {editable = true, path = "./src/Blockchain"}
 coloredlogs = "*"
-flask = "*"
-gunicorn = "*"
-flask-cors = "*"
-flask-sqlalchemy = "*"
 
 [dev-packages]
 black = "*"
@@ -25,4 +21,3 @@ python_version = "3.9"
 allow_prereleases = true
 
 [scripts]
-webdebug = "python src/Backend/app.py"
