@@ -12,6 +12,7 @@ blockchain = {editable = true, path = "./src/Blockchain"}
 coloredlogs = "*"
 fastapi = "*"
 uvicorn = "*"
+pydantic = "*"
 
 [dev-packages]
 black = "*"
