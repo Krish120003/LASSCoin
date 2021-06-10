@@ -3,8 +3,8 @@ import uvicorn
 
 from sqlalchemy.orm import Session
 
-from .models import CreateTransactionContext
-from .db import get_db, PendingTransaction, Base, engine
+from models import CreateTransactionContext
+from db import get_db, PendingTransaction, Base, engine
 
 height = 0
 

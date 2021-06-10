@@ -9,6 +9,7 @@ fastapi = "*"
 uvicorn = "*"
 pydantic = "*"
 sqlalchemy = "*"
+keymanager = {editable = true, path = "./KeyManager"}
 
 [dev-packages]
 black = "*"
@@ -20,4 +21,4 @@ python_version = "3.9"
 allow_prereleases = true
 
 [scripts]
-start = "uvicorn API.app:app"
+start = "uvicorn app:app"
