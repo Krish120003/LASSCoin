@@ -6,10 +6,6 @@ name = "pypi"
 [packages]
 pycryptodome = "*"
 keymanager = {editable = true, path = "./src/KeyManager"}
-arrow = "*"
-pyside2 = "==5.15.2"
-blockchain = {editable = true, path = "./src/Blockchain"}
-coloredlogs = "*"
 fastapi = "*"
 uvicorn = "*"
 pydantic = "*"

@@ -143,3 +143,4 @@ tempCodeRunnerFile.java
 *.class
 test.py
 *.db
+temp/
