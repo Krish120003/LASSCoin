@@ -5,7 +5,6 @@ name = "pypi"
 
 [packages]
 pycryptodome = "*"
-keymanager = {editable = true, path = "./src/KeyManager"}
 fastapi = "*"
 uvicorn = "*"
 pydantic = "*"
@@ -21,4 +20,4 @@ python_version = "3.9"
 allow_prereleases = true
 
 [scripts]
-start = "uvicorn src.API.app:app"
+start = "uvicorn API.app:app"
