@@ -13,6 +13,7 @@ coloredlogs = "*"
 fastapi = "*"
 uvicorn = "*"
 pydantic = "*"
+sqlalchemy = "*"
 
 [dev-packages]
 black = "*"
