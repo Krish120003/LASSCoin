@@ -5,15 +5,11 @@ name = "pypi"
 
 [packages]
 pycryptodome = "*"
-keymanager = {editable = true, path = "./src/KeyManager"}
-arrow = "*"
-pyside2 = "==5.15.2"
-blockchain = {editable = true, path = "./src/Blockchain"}
-coloredlogs = "*"
 fastapi = "*"
 uvicorn = "*"
 pydantic = "*"
 sqlalchemy = "*"
+keymanager = {editable = true, path = "./KeyManager"}
 
 [dev-packages]
 black = "*"
@@ -25,4 +21,4 @@ python_version = "3.9"
 allow_prereleases = true
 
 [scripts]
-start = "uvicorn src.API.app:app"
+start = "uvicorn app:app"
