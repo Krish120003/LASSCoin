@@ -17,7 +17,8 @@ Base = declarative_base()
 class PendingTransaction(Base):
     __tablename__ = "PendingTransactions"
 
-    height = Column(Integer, primary_key=True,  nullable=False, unique=True)
+    height = Column(Integer, nullable=False, unique=True)
+    uuid = Column(String, primary_key=True, nullable=False, unique=True)
 
     sender = Column(String, nullable=False)
     target = Column(String, nullable=False)
