@@ -4,20 +4,28 @@ import Link from 'next/link';
 
 const Foo = styled.nav`
     height: 80px;
-    background: #E6E6FA;
+    background: #000;
+    color: #FFF;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     `;
+
+const StyledLink = styled.a`
+    padding: 0rem 2rem;
+`
 
 const Navbar = () => {
     return (
         <Foo>
             <div> 
                 <Link href='/'>
-                    <a> Wallet </a> 
+                    <StyledLink> Wallet </StyledLink> 
                 </Link>
             </div>
             <div> 
                 <Link href='/'>
-                    <a> Global Transactions </a> 
+                    <StyledLink> Global Transactions </StyledLink> 
                 </Link>
             </div>
         </Foo>
