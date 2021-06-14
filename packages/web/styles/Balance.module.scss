@@ -1,3 +1,17 @@
 .balance_card {
-  background: #5c4e7a;
+  color: white;
+  background: var(--prim-color-1);
+  padding: 1.5em 4em;
+  border-radius: 2em;
+  width: 65vw;
+}
+
+.thold_title {
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
 }
