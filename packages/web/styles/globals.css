@@ -15,3 +15,9 @@ a {
 * {
   box-sizing: border-box;
 }
+
+:root {
+  --prim-color-1: #5c4e7a;
+  --secondary-color-1: #dae3e5;
+  --secondary-color-2: #ff8872;
+}
