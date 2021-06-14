@@ -1,3 +1,3 @@
 export default function BalanceCard() {
-    return <p></p>
+    return <p> money goes here </p>
   }
