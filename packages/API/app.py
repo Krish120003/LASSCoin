@@ -13,8 +13,8 @@ app = FastAPI(
     version="a1.0",
     description="API Backend to process LASSCoin transactions.",
 )
-Base.metadata.create_all(bind=engine)
 
+Base.metadata.create_all(bind=engine)
 
 @app.post("/api/transactions/")
 def create_transaction(data: CreateTransactionContext, db: Session = Depends(get_db)):
