@@ -6,8 +6,8 @@ class CreateTransactionContext(BaseModel):
     sender: str
     target: str
     value: float
-    signature: str
     uuid: str
+    signature: str
 
     @validator("signature")
     def verify_legitamicy(cls, v, values):
