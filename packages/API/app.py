@@ -8,7 +8,6 @@ from db import get_db, Base, engine
 from db import Transaction, PendingTransaction
 import util
 
-
 app = FastAPI(
     title="LASSCoin Backend",
     version="a1.0",
@@ -33,7 +32,7 @@ if not engine.has_table(Transaction.__tablename__) and not engine.has_table(
     db.commit()
 
 
-@app.post("/api/transactions/")
+@app.post("/api/transactions/", status_code=202)
 def create_transaction(data: CreateTransactionContext, db: Session = Depends(get_db)):
     height = util.get_max_height(db)
     db.add(
