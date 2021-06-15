@@ -46,6 +46,18 @@ def create_transaction(data: CreateTransactionContext, db: Session = Depends(get
         )
     )
     db.commit()
+    return {"message": "created, in queue"}
+
+
+@app.get("/api/miner/")
+def miner_block_request(db: Session = Depends(get_db)):
+    """
+    Returns the oldest pending transaction to be mined.
+    """
+    current_transaction = (
+        db.query(PendingTransaction).order_by(PendingTransaction.time).first()
+    )
+    return util.serialize_transaction(current_transaction)
 
 
 if __name__ == "__main__":
