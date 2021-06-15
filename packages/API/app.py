@@ -4,8 +4,7 @@ import uvicorn
 from sqlalchemy.orm import Session
 
 from models import CreateTransactionContext
-from db import get_db, Base, engine
-from db import Transaction, PendingTransaction
+from db import get_db, Base, engine, Transaction, PendingTransaction
 import util
 
 app = FastAPI(
