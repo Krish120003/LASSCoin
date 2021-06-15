@@ -4,7 +4,8 @@ import uvicorn
 from sqlalchemy.orm import Session
 
 from models import CreateTransactionContext
-from db import get_db, PendingTransaction, Base, engine
+from db import get_db, Base, engine
+from db import Transaction, PendingTransaction
 import util
 
 
@@ -14,7 +15,21 @@ app = FastAPI(
     description="API Backend to process LASSCoin transactions.",
 )
 
-Base.metadata.create_all(bind=engine)
+if not engine.has_table(Transaction.__tablename__) and not engine.has_table(
+):
+    Base.metadata.create_all(bind=engine)
+    db = next(get_db())
+    db.add(
+        PendingTransaction(
+            height=0,
+            uuid="GENESIS",
+            sender="GENESIS",
+            target="GENESIS",
+            value=0,
+            signature="GENESIS",
+        )
+    )
+    db.commit()
 
 
 @app.post("/api/transactions/")
