@@ -16,6 +16,7 @@ app = FastAPI(
 )
 
 if not engine.has_table(Transaction.__tablename__) and not engine.has_table(
+    PendingTransaction.__tablename__
 ):
     Base.metadata.create_all(bind=engine)
     db = next(get_db())
