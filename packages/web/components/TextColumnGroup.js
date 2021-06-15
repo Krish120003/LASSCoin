@@ -5,7 +5,7 @@ export default function TextColumnGroup() {
 
   return (
     <div>
-      <h4>L$ {} </h4>
+      <h4>L$ 0.00002 {} </h4>
       <p>Current Balance etc</p>
     </div>
   );
