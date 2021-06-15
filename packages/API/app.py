@@ -30,7 +30,6 @@ def create_transaction(data: CreateTransactionContext, db: Session = Depends(get
             uuid=data.uuid,
         )
     )
-    height += 1
     db.commit()
 
 
