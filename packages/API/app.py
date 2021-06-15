@@ -5,8 +5,8 @@ from sqlalchemy.orm import Session
 
 from models import CreateTransactionContext
 from db import get_db, PendingTransaction, Base, engine
+import util
 
-height = 0
 
 app = FastAPI(
     title="LASSCoin Backend",
@@ -16,9 +16,10 @@ app = FastAPI(
 
 Base.metadata.create_all(bind=engine)
 
+
 @app.post("/api/transactions/")
 def create_transaction(data: CreateTransactionContext, db: Session = Depends(get_db)):
-    global height
+    height = util.get_max_height(db)
     db.add(
         PendingTransaction(
             height=height,
