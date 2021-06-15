@@ -1,4 +1,4 @@
-from db import PendingTransaction, # Transactions
+from db import PendingTransaction  # , Transactions
 
 
 def get_max_height(db):
