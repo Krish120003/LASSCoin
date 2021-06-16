@@ -3,6 +3,8 @@ import uvicorn
 
 from sqlalchemy.orm import Session
 
+import datetime
+
 from models import CreateTransactionContext, MinedTransactionData
 from db import get_db, Base, engine, Transaction, PendingTransaction
 import util
@@ -83,6 +85,22 @@ def miner_block_mined(
     ):
         response.status_code = status.HTTP_403_FORBIDDEN
         return {"message": "false submission"}
+
+    # Move transaction to confirmed db
+    db.add(
+        Transaction(
+            height=data.height,
+            uuid=data.uuid,
+            sender=data.sender,
+            target=data.target,
+            value=data.value,
+            signature=data.signature,
+            time=datetime.utcfromtimestamp(data.time),
+            miner=data.miner,
+            nonce=data.nonce,
+            prev_hash=data.prev_hash,
+        )
+    )
 
     return data
 
