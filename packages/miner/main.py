@@ -32,7 +32,7 @@ def main(server, max_nonce, address):
     while True:
         try:
             # Get block data to mine
-
+            click.echo("Requesting new block...")
             response = requests.get(req_url)
             block = response.json()
 
@@ -45,15 +45,18 @@ def main(server, max_nonce, address):
             block["miner"] = address
 
             for i in range(max_nonce):
+                if i % 100000 == 0:
+                    click.echo("Mining...")
                 block["nonce"] = i
                 h = sha256()
                 h.update(json.dumps(block).encode("utf-8"))
                 hash = h.hexdigest()
                 if hash.startswith("0" * difficulty):
-                    print(hash, block)
+                    click.echo(
+                        f"Block {block['height']} mined with nonce {block['nonce']}"
+                    )
                     break
 
-            click.echo(block)
             time.sleep(1)
 
         except KeyboardInterrupt:
