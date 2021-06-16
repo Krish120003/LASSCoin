@@ -57,9 +57,15 @@ def miner_block_request(db: Session = Depends(get_db)):
         db.query(PendingTransaction).order_by(PendingTransaction.time).first()
     )
     data = util.serialize_transaction(current_transaction)
+    # Add prev hash if genesis block
     if data["height"] == 0:
         data["prev_hash"] = "GENESIS"
     return data
+
+
+@app.get("/api/miner/difficulty")
+def difficulty():
+    return 5
 
 
 if __name__ == "__main__":
