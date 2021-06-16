@@ -33,5 +33,4 @@ def check_hash(block_data, difficulty=5):
     h = sha256()
     h.update(block_data)
     hash = h.hexdigest()
-    print(hash)
     return hash.startswith("0" * difficulty)
