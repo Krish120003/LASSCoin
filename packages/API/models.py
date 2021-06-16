@@ -1,4 +1,4 @@
-from util import check_hash, build_binary_block_data
+from util import check_hash, build_binary_block_data, get_prev_hash, get_hash
 from pydantic import BaseModel, validator
 from KeyManager import verify
 
@@ -49,3 +49,13 @@ class MinedTransactionData(BaseModel):
         if not check_hash(build_binary_block_data(values)):
             raise ValueError("Invalid block hash.")
         return v
+
+    @validator("prev_hash")
+    def verify_prev_hash(cls, v, values):
+        if values["height"] == 0 and values["signature"] == "GENESIS":
+            return v
+        else:
+            db = next(get_db())
+            if v != get_prev_hash(db):
+                raise ValueError("Inavlid previous hash.")
+            return v
