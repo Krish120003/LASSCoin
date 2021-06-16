@@ -58,6 +58,8 @@ def miner_block_request(db: Session = Depends(get_db)):
     current_transaction = (
         db.query(PendingTransaction).order_by(PendingTransaction.time).first()
     )
+    if current_transaction == None:
+        return {"message": "No pending transactions."}
     data = util.serialize_transaction(current_transaction)
     # Add prev hash if genesis block
     if data["height"] == 0:
