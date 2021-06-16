@@ -3,7 +3,7 @@ from hashlib import sha256
 
 
 def get_max_height(db):
-    return db.query(Transaction).count()
+    return db.query(PendingTransaction).count() + db.query(Transaction).count()
 
 
 def serialize_transaction(data):
