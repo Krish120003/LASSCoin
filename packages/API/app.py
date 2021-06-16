@@ -111,7 +111,7 @@ def miner_block_mined(
 
 @app.get("/api/miner/difficulty")
 def difficulty():
-    return 1
+    return 4
 
 
 if __name__ == "__main__":

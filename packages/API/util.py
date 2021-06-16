@@ -34,7 +34,7 @@ def get_hash(block_data):
     return h.hexdigest()
 
 
-def check_hash(block_data, difficulty=1):
+def check_hash(block_data, difficulty=4):
     hash = get_hash(block_data)
     return hash.startswith("0" * difficulty)
 
@@ -55,5 +55,4 @@ def get_prev_hash(db):
             "nonce": latest_t.nonce,
         }
     )
-    print("PREV HASH DATA IS: " + data.decode("utf-8"))
     return get_hash(data)
