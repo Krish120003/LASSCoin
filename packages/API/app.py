@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Depends
+from fastapi import FastAPI, Depends, Response, status
 import uvicorn
 
 from sqlalchemy.orm import Session
@@ -63,8 +63,12 @@ def miner_block_request(db: Session = Depends(get_db)):
     return data
 
 
-@app.post("/api/miner/")
-def miner_block_mined(data: MinedTransactionData, db: Session = Depends(get_db)):
+@app.post("/api/miner/", status_code=200)
+def miner_block_mined(
+    data: MinedTransactionData,
+    db: Session = Depends(get_db),
+    response: Response = Response,
+):
     """
     Endpoint for miners to submit verified transactions.
     """
@@ -77,6 +81,7 @@ def miner_block_mined(data: MinedTransactionData, db: Session = Depends(get_db))
         not current_transaction.uuid == data.uuid
         or current_transaction.signature == data.signature
     ):
+        response.status_code = status.HTTP_403_FORBIDDEN
         return {"message": "false submission"}
 
     return data
