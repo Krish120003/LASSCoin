@@ -81,7 +81,7 @@ def miner_block_mined(
     )
     if (
         not current_transaction.uuid == data.uuid
-        or current_transaction.signature == data.signature
+        or not current_transaction.signature == data.signature
     ):
         response.status_code = status.HTTP_403_FORBIDDEN
         return {"message": "false submission"}
@@ -95,12 +95,15 @@ def miner_block_mined(
             target=data.target,
             value=data.value,
             signature=data.signature,
-            time=datetime.utcfromtimestamp(data.time),
+            time=datetime.datetime.utcfromtimestamp(data.time),
             miner=data.miner,
             nonce=data.nonce,
             prev_hash=data.prev_hash,
         )
     )
+
+    db.delete(current_transaction)
+    db.commit()
 
     return data
 
