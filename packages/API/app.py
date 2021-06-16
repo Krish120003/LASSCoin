@@ -56,7 +56,10 @@ def miner_block_request(db: Session = Depends(get_db)):
     current_transaction = (
         db.query(PendingTransaction).order_by(PendingTransaction.time).first()
     )
-    return util.serialize_transaction(current_transaction)
+    data = util.serialize_transaction(current_transaction)
+    if data["height"] == 0:
+        data["prev_hash"] = "GENESIS"
+    return data
 
 
 if __name__ == "__main__":
