@@ -9,7 +9,7 @@ from hashlib import sha256
 @click.command()
 @click.option("--server", default="http://127.0.0.1:8000", help="Server URL")
 @click.option(
-    "--max-nonce", default=2 ** 32 - 1, help="The maximum nonce to try when mining."
+    "--max-nonce", default=2 ** 32 - 1, help="Maximum nonce to try when mining"
 )
 @click.option("--address", help="Miner's public address.", required=True)
 def main(server, max_nonce, address):
@@ -27,6 +27,7 @@ def main(server, max_nonce, address):
             time.sleep(1)
 
         except KeyboardInterrupt:
+            # Get rid of the ctrl c when exiting
             click.echo("\rExiting...")
             sys.exit(0)
         except Exception as e:
