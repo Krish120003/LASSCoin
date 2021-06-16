@@ -3,7 +3,7 @@ import uvicorn
 
 from sqlalchemy.orm import Session
 
-from models import CreateTransactionContext
+from models import CreateTransactionContext, MinedTransactionData
 from db import get_db, Base, engine, Transaction, PendingTransaction
 import util
 
@@ -60,6 +60,12 @@ def miner_block_request(db: Session = Depends(get_db)):
     # Add prev hash if genesis block
     if data["height"] == 0:
         data["prev_hash"] = "GENESIS"
+    return data
+
+
+@app.post("/api/miner/")
+def miner_block_mined(data: MinedTransactionData, db: Session = Depends(get_db)):
+
     return data
 
 
