@@ -63,6 +63,8 @@ def miner_block_request(db: Session = Depends(get_db)):
     # Add prev hash if genesis block
     if data["height"] == 0:
         data["prev_hash"] = "GENESIS"
+    else:
+        data["prev_hash"] = util.get_prev_hash(db)
     return data
 
 
