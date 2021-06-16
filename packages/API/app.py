@@ -36,7 +36,6 @@ if not engine.has_table(Transaction.__tablename__) and not engine.has_table(
 @app.post("/api/transactions/", status_code=202)
 def create_transaction(data: CreateTransactionContext, db: Session = Depends(get_db)):
     height = util.get_max_height(db)
-    print(height)
     db.add(
         PendingTransaction(
             height=height,

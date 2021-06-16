@@ -70,7 +70,6 @@ def main(server, max_nonce, address):
                     click.echo(
                         f"Block {block['height']} mined with nonce {block['nonce']} | Hash {hash}"
                     )
-                    print(block)
                     time.sleep(5)
                     break
 
