@@ -7,6 +7,21 @@ import time
 from hashlib import sha256
 
 
+def build_binary_block_data(data):
+    res = ""
+    res += str(data["nonce"])
+    res += str(data["height"])
+    res += str(data["time"])
+    res += str(data["uuid"])
+    res += str(data["value"])
+    res += str(data["sender"])
+    res += str(data["target"])
+    res += str(data["prev_hash"])
+    res += str(data["miner"])
+    res += str(data["signature"])
+    return res.encode("utf-8")
+
+
 @click.command()
 @click.option("--server", default="http://127.0.0.1:8000", help="Server URL")
 @click.option(
@@ -49,12 +64,14 @@ def main(server, max_nonce, address):
                     click.echo("Mining...")
                 block["nonce"] = i
                 h = sha256()
-                h.update(json.dumps(block).encode("utf-8"))
+                h.update(build_binary_block_data(block))
                 hash = h.hexdigest()
                 if hash.startswith("0" * difficulty):
                     click.echo(
                         f"Block {block['height']} mined with nonce {block['nonce']}"
                     )
+                    print(block)
+                    time.sleep(5)
                     break
 
             time.sleep(1)
