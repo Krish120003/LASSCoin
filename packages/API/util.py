@@ -49,10 +49,11 @@ def get_prev_hash(db):
             "value": latest_t.value,
             "height": latest_t.height,
             "sender": latest_t.sender,
-            "time": latest_t.time.timestamp(),
+            "time": int(latest_t.time.timestamp()),
             "prev_hash": latest_t.prev_hash,
             "miner": latest_t.miner,
             "nonce": latest_t.nonce,
         }
     )
+    print("PREV HASH DATA IS: " + data.decode("utf-8"))
     return get_hash(data)
