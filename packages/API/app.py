@@ -74,7 +74,6 @@ def miner_block_mined(
     """
     Endpoint for miners to submit verified transactions.
     """
-    print(data)
     # Check if this transaction is the latest in the queue.
     current_transaction = (
         db.query(PendingTransaction).order_by(PendingTransaction.time).first()
