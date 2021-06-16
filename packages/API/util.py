@@ -3,7 +3,7 @@ from hashlib import sha256
 
 
 def get_max_height(db):
-    return db.query(PendingTransaction).count()  # + db.query(Transactions)
+    return db.query(PendingTransaction).count() + db.query(Transaction).count()
 
 
 def serialize_transaction(data):
@@ -25,7 +25,6 @@ def build_binary_block_data(data):
     res += str(data["prev_hash"])
     res += str(data["miner"])
     res += str(data["signature"])
-    print(res)
     return res.encode("utf-8")
 
 
