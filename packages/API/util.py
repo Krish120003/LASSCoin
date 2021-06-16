@@ -1,4 +1,4 @@
-from db import PendingTransaction  # , Transactions
+from db import PendingTransaction, Transaction
 from hashlib import sha256
 
 
@@ -25,11 +25,35 @@ def build_binary_block_data(data):
     res += str(data["prev_hash"])
     res += str(data["miner"])
     res += str(data["signature"])
+    print(res)
     return res.encode("utf-8")
 
 
-def check_hash(block_data, difficulty=5):
+def get_hash(block_data):
     h = sha256()
     h.update(block_data)
-    hash = h.hexdigest()
+    return h.hexdigest()
+
+
+def check_hash(block_data, difficulty=1):
+    hash = get_hash(block_data)
     return hash.startswith("0" * difficulty)
+
+
+def get_prev_hash(db):
+    latest_t = db.query(Transaction).order_by(Transaction.height.desc()).first()
+    data = build_binary_block_data(
+        {
+            "target": latest_t.target,
+            "uuid": latest_t.uuid,
+            "signature": latest_t.signature,
+            "value": latest_t.value,
+            "height": latest_t.height,
+            "sender": latest_t.sender,
+            "time": latest_t.time.timestamp(),
+            "prev_hash": latest_t.prev_hash,
+            "miner": latest_t.miner,
+            "nonce": latest_t.nonce,
+        }
+    )
+    return get_hash(data)
