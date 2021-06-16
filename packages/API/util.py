@@ -1,6 +1,5 @@
 from db import PendingTransaction  # , Transactions
 from hashlib import sha256
-import json
 
 
 def get_max_height(db):
