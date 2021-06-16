@@ -36,6 +36,7 @@ if not engine.has_table(Transaction.__tablename__) and not engine.has_table(
 @app.post("/api/transactions/", status_code=202)
 def create_transaction(data: CreateTransactionContext, db: Session = Depends(get_db)):
     height = util.get_max_height(db)
+    print(height)
     db.add(
         PendingTransaction(
             height=height,
@@ -94,7 +95,7 @@ def miner_block_mined(
             target=data.target,
             value=data.value,
             signature=data.signature,
-            time=datetime.datetime.utcfromtimestamp(data.time),
+            time=datetime.datetime.fromtimestamp(data.time),
             miner=data.miner,
             nonce=data.nonce,
             prev_hash=data.prev_hash,
@@ -109,7 +110,7 @@ def miner_block_mined(
 
 @app.get("/api/miner/difficulty")
 def difficulty():
-    return 5
+    return 1
 
 
 if __name__ == "__main__":
