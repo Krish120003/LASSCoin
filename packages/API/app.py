@@ -65,6 +65,19 @@ def miner_block_request(db: Session = Depends(get_db)):
 
 @app.post("/api/miner/")
 def miner_block_mined(data: MinedTransactionData, db: Session = Depends(get_db)):
+    """
+    Endpoint for miners to submit verified transactions.
+    """
+    print(data)
+    # Check if this transaction is the latest in the queue.
+    current_transaction = (
+        db.query(PendingTransaction).order_by(PendingTransaction.time).first()
+    )
+    if (
+        not current_transaction.uuid == data.uuid
+        or current_transaction.signature == data.signature
+    ):
+        return {"message": "false submission"}
 
     return data
 
