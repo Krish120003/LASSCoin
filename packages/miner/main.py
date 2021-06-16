@@ -1,6 +1,7 @@
 import click
 from urllib.parse import urljoin
 import requests
+import json
 import sys
 import time
 from hashlib import sha256
@@ -16,12 +17,41 @@ def main(server, max_nonce, address):
     click.echo("Starting LASSCoin Miner. Use --help to see all CLI options.")
 
     req_url = urljoin(server, "/api/miner/")
+    difficulty_url = urljoin(req_url, "/api/miner/difficulty")
+
+    try:
+        difficulty = requests.get(difficulty_url).json()
+    except Exception:
+        click.echo(
+            "Connection Failed. Check your internet connection and/or server location."
+        )
+        sys.exit()
+    finally:
+        click.echo(f"Difficulty set to level {difficulty}")
 
     while True:
         try:
             # Get block data to mine
+
             response = requests.get(req_url)
             block = response.json()
+
+            # If no blocks are available
+            if "message" in block:
+                click.echo("No blocks to mine. Sleeping 2 mins.")
+                time.sleep(120)
+                continue
+
+            block["miner"] = address
+
+            for i in range(max_nonce):
+                block["nonce"] = i
+                h = sha256()
+                h.update(json.dumps(block).encode("utf-8"))
+                hash = h.hexdigest()
+                if hash.startswith("0" * difficulty):
+                    print(hash, block)
+                    break
 
             click.echo(block)
             time.sleep(1)
