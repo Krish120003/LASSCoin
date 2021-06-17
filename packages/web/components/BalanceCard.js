@@ -4,13 +4,25 @@ import BalanceCardButton from "./BalanceCardButton";
 
 export default function BalanceCard() {
   return (
-    <div className={styles.balance_card}>
+    <div className={`${styles.balance_card} flex_margin`}>
       <h3 className={styles.thold_title}>Balance Details</h3>
       <div>
-        <TextColumnGroup class={styles.main_text_column} title="Current Balance" value={2.2500200}/>
+        <TextColumnGroup
+          class={styles.main_text_column}
+          title="Current Balance"
+          value={2.25002}
+        />
         <div className={styles.flex_split}>
-          <TextColumnGroup class={styles.mini_text_column} title="Lifetime Mined" value={3.2500000}/>
-          <TextColumnGroup class={styles.mini_text_column} title="Lifetime Received" value={0.0000200}/>
+          <TextColumnGroup
+            class={styles.mini_text_column}
+            title="Lifetime Mined"
+            value={3.25}
+          />
+          <TextColumnGroup
+            class={styles.mini_text_column}
+            title="Lifetime Received"
+            value={0.00002}
+          />
         </div>
       </div>
       <div className={styles.buttons}>
