@@ -1,24 +1,44 @@
-from fastapi import FastAPI, Depends
+from fastapi import FastAPI, Depends, Response, status
 import uvicorn
 
 from sqlalchemy.orm import Session
 
-from models import CreateTransactionContext
-from db import get_db, PendingTransaction, Base, engine
+import datetime
 
-height = 0
+from models import CreateTransactionContext, MinedTransactionData
+from db import get_db, Base, engine, Transaction, PendingTransaction
+import util
 
 app = FastAPI(
     title="LASSCoin Backend",
     version="a1.0",
     description="API Backend to process LASSCoin transactions.",
 )
-Base.metadata.create_all(bind=engine)
+
+if not engine.has_table(Transaction.__tablename__) and not engine.has_table(
+    PendingTransaction.__tablename__
+):
+    Base.metadata.create_all(bind=engine)
+    db = next(get_db())
+    db.add(
+        PendingTransaction(
+            height=0,
+            uuid="GENESIS",
+            sender="GENESIS",
+            target="GENESIS",
+            value=0,
+            signature="GENESIS",
+        )
+    )
+    db.commit()
 
 
-@app.post("/api/transactions/")
-def create_transaction(data: CreateTransactionContext, db: Session = Depends(get_db)):
-    global height
+@app.post("/api/transactions/", status_code=202)
+def create_transaction(data: CreateTransactionContext, db: Session = Depends(get_db), response: Response = Response):
+    if util.get_balance(data.sender) < data.value:
+        response.status_code = status.HTTP_403_FORBIDDEN
+        return {"message": "Not enough balance."}
+    height = util.get_max_height(db)
     db.add(
         PendingTransaction(
             height=height,
@@ -29,8 +49,74 @@ def create_transaction(data: CreateTransactionContext, db: Session = Depends(get
             uuid=data.uuid,
         )
     )
-    height += 1
     db.commit()
+    return {"message": "created, in queue"}
+
+
+@app.get("/api/miner/")
+def miner_block_request(db: Session = Depends(get_db)):
+    """
+    Returns the oldest pending transaction to be mined.
+    """
+    current_transaction = (
+        db.query(PendingTransaction).order_by(PendingTransaction.time).first()
+    )
+    if current_transaction == None:
+        return {"message": "No pending transactions."}
+    data = util.serialize_transaction(current_transaction)
+    # Add prev hash if genesis block
+    if data["height"] == 0:
+        data["prev_hash"] = "GENESIS"
+    else:
+        data["prev_hash"] = util.get_prev_hash(db)
+    return data
+
+
+@app.post("/api/miner/", status_code=200)
+def miner_block_mined(
+    data: MinedTransactionData,
+    db: Session = Depends(get_db),
+    response: Response = Response,
+):
+    """
+    Endpoint for miners to submit verified transactions.
+    """
+    # Check if this transaction is the latest in the queue.
+    current_transaction = (
+        db.query(PendingTransaction).order_by(PendingTransaction.time).first()
+    )
+    if (
+        not current_transaction.uuid == data.uuid
+        or not current_transaction.signature == data.signature
+    ):
+        response.status_code = status.HTTP_403_FORBIDDEN
+        return {"message": "false submission"}
+
+    # Move transaction to confirmed db
+    db.add(
+        Transaction(
+            height=data.height,
+            uuid=data.uuid,
+            sender=data.sender,
+            target=data.target,
+            value=data.value,
+            signature=data.signature,
+            time=datetime.datetime.fromtimestamp(data.time),
+            miner=data.miner,
+            nonce=data.nonce,
+            prev_hash=data.prev_hash,
+        )
+    )
+
+    db.delete(current_transaction)
+    db.commit()
+
+    return data
+
+
+@app.get("/api/miner/difficulty/")
+def difficulty():
+    return 4
 
 
 if __name__ == "__main__":

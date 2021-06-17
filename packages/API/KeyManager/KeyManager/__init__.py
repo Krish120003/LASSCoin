@@ -40,7 +40,7 @@ def encode(data):
     Encode binary data into a string
     using base64 encoding.
     """
-    return base64.b64encode(data)
+    return base64.b64encode(data).decode("utf-8")
 
 
 def decode(data):
@@ -65,9 +65,10 @@ def verify(public_key, message, signature):
     """
     Verify a message's integrity using a signature.
     """
+    print("Verifiying")
     if type(public_key) == str:
         public_key = RSA.import_key(_parse_public_key(public_key))
-    
+
     verifier = pkcs1_15.new(public_key)
     hash = SHA256.new(message.encode("utf-8"))
     try:
@@ -76,7 +77,7 @@ def verify(public_key, message, signature):
     except (ValueError, TypeError):
         return False
 
-def _parse_public_key(line):
-    y = [line[i:i+64] for i in range(0, len(line), 64)]
-    return "\n".join(["-----BEGIN PUBLIC KEY-----", *y, "-----END PUBLIC KEY-----"])
 
+def _parse_public_key(line):
+    y = [line[i : i + 64] for i in range(0, len(line), 64)]
+    return "\n".join(["-----BEGIN PUBLIC KEY-----", *y, "-----END PUBLIC KEY-----"])
