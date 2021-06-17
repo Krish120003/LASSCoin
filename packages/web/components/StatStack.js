@@ -4,7 +4,7 @@ import styles from "../styles/StatStack.module.scss";
 
 export default function StatStack() {
   return (
-    <div className={styles.stat_stack}>
+    <div className={`${styles.stat_stack} flex_margin`}>
       <h2 classNa>BLOCKCHAIN STATS</h2>
       <div>
         <StatCard title={"Height"} value={1337} />
