@@ -8,8 +8,10 @@ import StatStack from "../components/StatStack";
 export default function Home() {
   return (
     <div className={styles.layout}>
-      <BalanceCard />
-      <StatStack />
+      <div className={styles.top_section}>
+        <BalanceCard />
+        <StatStack />
+      </div>
     </div>
   );
 }
