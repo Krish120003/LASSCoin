@@ -21,3 +21,7 @@ a {
   --secondary-color-1: #dae3e5;
   --secondary-color-2: #ff8872;
 }
+
+.flex_margin {
+  margin-right: 3em;
+}
