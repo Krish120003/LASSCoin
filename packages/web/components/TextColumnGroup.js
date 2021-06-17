@@ -1,12 +1,10 @@
 import { useState } from "react";
 
-export default function TextColumnGroup() {
-  const [currentBalance, setCurrentBalance] = useState(0);
-
+export default function TextColumnGroup(props) {
   return (
     <div>
-      <h4>L$ 0.00002 {} </h4>
-      <p>Current Balance etc</p>
+      <h4>L$ {props.value ? props.value.toFixed(6) : ""}</h4>
+      <p>{props.title}</p>
     </div>
   );
 }
