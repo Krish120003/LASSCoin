@@ -8,7 +8,12 @@ from typing import Optional
 
 
 class AddressContext(BaseModel):
+    address: str
+
+
+class GetTransactionContext(BaseModel):
     address: Optional[str]
+    next: Optional[str]
 
 
 class CreateTransactionContext(BaseModel):
