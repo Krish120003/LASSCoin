@@ -4,9 +4,11 @@ from KeyManager import verify
 
 from db import get_db, PendingTransaction, Transaction
 
+from typing import Optional
+
 
 class AddressContext(BaseModel):
-    address: str
+    address: Optional[str]
 
 
 class CreateTransactionContext(BaseModel):
