@@ -12,8 +12,8 @@ export default function Home() {
         <Head> 
           <title> PAIN </title>
         </Head>
-        <PublicTransactionList/>
         <UserTransactionList/>
+        <PublicTransactionList/>
       </>
   )
 };

@@ -10,7 +10,7 @@ export default function PublicTransactionList(props) {
 
     return (
         <div>
-            <h4> Example Transaction </h4>
+            <h4> Example Public Transaction </h4>
             {extransactions}
         </div>
     )

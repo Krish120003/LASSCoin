@@ -10,7 +10,7 @@ export default function UserTransactionList(props) {
 
    return (
        <div>
-           <h4> Example Transaction </h4>
+           <h4> Example User Transaction </h4>
            {extransactions}
        </div>
    )
