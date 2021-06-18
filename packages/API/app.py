@@ -1,11 +1,16 @@
-from fastapi import FastAPI, Depends, Response, status
+from fastapi import FastAPI, Depends, Response, status, Form
 import uvicorn
 
 from sqlalchemy.orm import Session
 
 import datetime
 
-from models import CreateTransactionContext, MinedTransactionData, AddressContext
+from models import (
+    CreateTransactionContext,
+    MinedTransactionData,
+    AddressContext,
+    GetTransactionContext,
+)
 from db import get_db, Base, engine, Transaction, PendingTransaction
 import util
 
@@ -33,6 +38,30 @@ if not engine.has_table(Transaction.__tablename__) and not engine.has_table(
     db.commit()
 
 
+@app.get("/api/transactions/")
+def get_transactions(data: GetTransactionContext, db: Session = Depends(get_db)):
+    if data.address:
+        x = (
+            db.query(Transaction)
+            .order_by(Transaction.height.desc())
+            .filter_by(sender=data.address)
+            .all()
+        )
+        y = (
+            db.query(Transaction)
+            .order_by(Transaction.height.desc())
+            .filter_by(target=data.address)
+            .all()
+        )
+        return sorted(x + y, key=lambda x: x.height, reverse=True)[:500]
+
+    else:
+        if data.next:
+            pass
+        else:
+            return db.query(Transaction).order_by(Transaction.height.desc()).all()[:10]
+
+
 @app.post("/api/transactions/", status_code=202)
 def create_transaction(
     data: CreateTransactionContext,
@@ -57,7 +86,7 @@ def create_transaction(
     return {"message": "created, in queue"}
 
 
-@app.get("/api/transactions/balance", status_code=200)
+@app.get("/api/transactions/balance/", status_code=200)
 def account_balance(data: AddressContext, db: Session = Depends(get_db)):
     try:
         balance = util.get_balance(db, data.address)
@@ -67,7 +96,7 @@ def account_balance(data: AddressContext, db: Session = Depends(get_db)):
     return {"balance": balance}
 
 
-@app.get("/api/transactions/height")
+@app.get("/api/transactions/height/")
 def chain_height(db: Session = Depends(get_db)):
     return {"height": db.query(Transaction).count()}
 
