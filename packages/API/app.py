@@ -67,6 +67,11 @@ def account_balance(data: AddressContext, db: Session = Depends(get_db)):
     return {"balance": balance}
 
 
+@app.get("/api/transactions/height")
+def chain_height(db: Session = Depends(get_db)):
+    return {"height": db.query(Transaction).count()}
+
+
 @app.get("/api/miner/")
 def miner_block_request(db: Session = Depends(get_db)):
     """
