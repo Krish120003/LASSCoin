@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Depends, Response, status, Form
+from fastapi import FastAPI, Depends, Response, status, Request
 from fastapi.middleware.cors import CORSMiddleware
 
 import uvicorn
@@ -6,12 +6,12 @@ import uvicorn
 from sqlalchemy.orm import Session
 
 import datetime
+from typing import Optional
 
 from models import (
     CreateTransactionContext,
     MinedTransactionData,
     AddressContext,
-    GetTransactionContext,
 )
 from db import get_db, Base, engine, Transaction, PendingTransaction
 import util
@@ -48,28 +48,33 @@ if not engine.has_table(Transaction.__tablename__) and not engine.has_table(
     db.commit()
 
 
-@app.get("/api/transactions/")
-def get_transactions(data: GetTransactionContext, db: Session = Depends(get_db)):
-    if data.address:
-        x = (
+@app.get("/api/transactions/", status_code=200)
+async def get_transactions(
+    next: Optional[str] = None,
+    db: Session = Depends(get_db),
+    response: Response = Response,
+):
+    if next:
+        start_point = db.query(Transaction).filter_by(uuid=next).first()
+        if not start_point:
+            response.status_code = status.HTTP_404_NOT_FOUND
+            return {"message": "Invalid 'next' param"}
+        transactions = (
             db.query(Transaction)
+            .filter(Transaction.height < start_point.height)
             .order_by(Transaction.height.desc())
-            .filter_by(sender=data.address)
-            .all()
+            .all()[:10]
         )
-        y = (
-            db.query(Transaction)
-            .order_by(Transaction.height.desc())
-            .filter_by(target=data.address)
-            .all()
-        )
-        return sorted(x + y, key=lambda x: x.height, reverse=True)[:500]
-
     else:
-        if data.next:
-            pass
-        else:
-            return db.query(Transaction).order_by(Transaction.height.desc()).all()[:10]
+        transactions = (
+            db.query(Transaction).order_by(Transaction.height.desc()).all()[:10]
+        )
+    next = transactions[-1].uuid
+
+    return {
+        "data": [util.serialize_transaction(t) for t in transactions],
+        "next": next,
+    }
 
 
 @app.post("/api/transactions/", status_code=202)
