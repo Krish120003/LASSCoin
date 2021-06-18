@@ -5,6 +5,10 @@ from KeyManager import verify
 from db import get_db, PendingTransaction, Transaction
 
 
+class AddressContext(BaseModel):
+    address: str
+
+
 class CreateTransactionContext(BaseModel):
     sender: str
     target: str

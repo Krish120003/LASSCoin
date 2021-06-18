@@ -5,7 +5,7 @@ from sqlalchemy.orm import Session
 
 import datetime
 
-from models import CreateTransactionContext, MinedTransactionData
+from models import CreateTransactionContext, MinedTransactionData, AddressContext
 from db import get_db, Base, engine, Transaction, PendingTransaction
 import util
 
@@ -31,6 +31,16 @@ if not engine.has_table(Transaction.__tablename__) and not engine.has_table(
         )
     )
     db.commit()
+
+
+@app.get("/api/transactions/balance", status_code=200)
+def account_balance(data: AddressContext, db: Session = Depends(get_db)):
+    try:
+        balance = util.get_balance(db, data.address)
+    except Exception as e:
+        print(e)
+        return {"balance": "N/A"}
+    return {"balance": balance}
 
 
 @app.post("/api/transactions/", status_code=202)
