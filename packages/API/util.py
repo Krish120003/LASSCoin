@@ -72,4 +72,10 @@ def get_balance(db, address):
             for transac in db.query(Transaction).filter_by(sender=address).all()
         ]
     )
-    return transfers + earned - transferred
+    pending_transferred = sum(
+        [
+            transac.value
+            for transac in db.query(PendingTransaction).filter_by(sender=address).all()
+        ]
+    )
+    return transfers + earned - transferred - pending_transferred
