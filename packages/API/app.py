@@ -33,16 +33,6 @@ if not engine.has_table(Transaction.__tablename__) and not engine.has_table(
     db.commit()
 
 
-@app.get("/api/transactions/balance", status_code=200)
-def account_balance(data: AddressContext, db: Session = Depends(get_db)):
-    try:
-        balance = util.get_balance(db, data.address)
-    except Exception as e:
-        print(e)
-        return {"balance": "N/A"}
-    return {"balance": balance}
-
-
 @app.post("/api/transactions/", status_code=202)
 def create_transaction(
     data: CreateTransactionContext,
@@ -67,6 +57,16 @@ def create_transaction(
     return {"message": "created, in queue"}
 
 
+@app.get("/api/transactions/balance", status_code=200)
+def account_balance(data: AddressContext, db: Session = Depends(get_db)):
+    try:
+        balance = util.get_balance(db, data.address)
+    except Exception as e:
+        print(e)
+        return {"balance": "N/A"}
+    return {"balance": balance}
+
+
 @app.get("/api/miner/")
 def miner_block_request(db: Session = Depends(get_db)):
     """
@@ -84,6 +84,11 @@ def miner_block_request(db: Session = Depends(get_db)):
     else:
         data["prev_hash"] = util.get_prev_hash(db)
     return data
+
+
+@app.get("/api/miner/difficulty/")
+def difficulty():
+    return 4
 
 
 @app.post("/api/miner/", status_code=200)
@@ -126,11 +131,6 @@ def miner_block_mined(
     db.commit()
 
     return data
-
-
-@app.get("/api/miner/difficulty/")
-def difficulty():
-    return 4
 
 
 if __name__ == "__main__":
