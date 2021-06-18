@@ -1,4 +1,6 @@
 from fastapi import FastAPI, Depends, Response, status, Form
+from fastapi.middleware.cors import CORSMiddleware
+
 import uvicorn
 
 from sqlalchemy.orm import Session
@@ -18,6 +20,14 @@ app = FastAPI(
     title="LASSCoin Backend",
     version="a1.0",
     description="API Backend to process LASSCoin transactions.",
+)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 if not engine.has_table(Transaction.__tablename__) and not engine.has_table(
