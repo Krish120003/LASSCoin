@@ -10,6 +10,7 @@ uvicorn = "*"
 pydantic = "*"
 sqlalchemy = "*"
 keymanager = {editable = true, path = "./KeyManager"}
+python-multipart = "*"
 
 [dev-packages]
 black = "*"
