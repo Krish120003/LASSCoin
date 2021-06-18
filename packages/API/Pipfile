@@ -11,6 +11,7 @@ pydantic = "*"
 sqlalchemy = "*"
 keymanager = {editable = true, path = "./KeyManager"}
 python-multipart = "*"
+psycopg2-binary = "*"
 
 [dev-packages]
 black = "*"
