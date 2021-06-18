@@ -57,8 +57,19 @@ def get_prev_hash(db):
     )
     return get_hash(data)
 
+
 def get_balance(db, address):
-    transfers = sum([transac.value for transac in db.query(Transaction).filter_by(target=address).all()])
+    transfers = sum(
+        [
+            transac.value
+            for transac in db.query(Transaction).filter_by(target=address).all()
+        ]
+    )
     earned = len(db.query(Transaction).filter_by(miner=address).all()) * 5
-    transferred = sum([transac.value for transac in db.query(Transaction).filter_by(sender=address).all()])
+    transferred = sum(
+        [
+            transac.value
+            for transac in db.query(Transaction).filter_by(sender=address).all()
+        ]
+    )
     return transfers + earned - transferred
