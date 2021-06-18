@@ -34,8 +34,12 @@ if not engine.has_table(Transaction.__tablename__) and not engine.has_table(
 
 
 @app.post("/api/transactions/", status_code=202)
-def create_transaction(data: CreateTransactionContext, db: Session = Depends(get_db), response: Response = Response):
-    if util.get_balance(data.sender) < data.value:
+def create_transaction(
+    data: CreateTransactionContext,
+    db: Session = Depends(get_db),
+    response: Response = Response,
+):
+    if util.get_balance(db, data.sender) < data.value:
         response.status_code = status.HTTP_403_FORBIDDEN
         return {"message": "Not enough balance."}
     height = util.get_max_height(db)
