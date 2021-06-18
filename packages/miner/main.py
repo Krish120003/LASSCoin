@@ -72,10 +72,10 @@ def main(server, max_nonce, address):
                     )
                     # Send to server
                     response = requests.post(req_url, json=block)
-                    time.sleep(5)
+                    # time.sleep(5)
                     break
 
-            time.sleep(1)
+            # time.sleep(1)
 
         except KeyboardInterrupt:
             # Get rid of the ctrl c when exiting
