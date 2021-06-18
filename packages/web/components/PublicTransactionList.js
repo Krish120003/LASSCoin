@@ -1,5 +1,5 @@
 import {useState} from "react";
-
+import styles from "../styles/Transactions.module.scss";
 
 export default function PublicTransactionList(props) {
     const [PublicTransactions, setPublicTransactions] = useState(0);
@@ -10,8 +10,15 @@ export default function PublicTransactionList(props) {
 
     return (
         <div>
-            <h4> Example Public Transaction </h4>
-            {extransactions}
+            <h4> User Transaction </h4>
+            <ul className={styles.styled_list}>
+              {
+                  extransactions.map(x => {
+                      return <li>{x}</li>
+                  })
+              }  
+            </ul>
+
         </div>
     )
 }
