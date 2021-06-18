@@ -2,7 +2,7 @@ from util import check_hash, build_binary_block_data, get_prev_hash, get_hash
 from pydantic import BaseModel, validator
 from KeyManager import verify
 
-from db import get_db, PendingTransaction
+from db import get_db, PendingTransaction, Transaction
 
 
 class CreateTransactionContext(BaseModel):
@@ -15,7 +15,12 @@ class CreateTransactionContext(BaseModel):
     @validator("uuid")
     def verify_uniqueness(cls, v, values):
         db = next(get_db())
+        # Check pending transactions
         res = db.query(PendingTransaction).filter_by(uuid=v).all()
+        if res:
+            raise ValueError("Transaction Exists")
+        # Check verified transactions
+        res = db.query(Transaction).filter_by(uuid=v).all()
         if res:
             raise ValueError("Transaction Exists")
         return v
