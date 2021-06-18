@@ -65,7 +65,6 @@ def verify(public_key, message, signature):
     """
     Verify a message's integrity using a signature.
     """
-    print("Verifiying")
     if type(public_key) == str:
         public_key = RSA.import_key(_parse_public_key(public_key))
 
