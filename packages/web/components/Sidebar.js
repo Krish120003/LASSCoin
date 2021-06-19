@@ -20,7 +20,7 @@ export default function Sidebar() {
         iconName="radix-icons:activity-log"
         active={currentPage == 1}
       />
-      <SidebarButton iconName="bx:bx-log-out" />
+      <SidebarButton iconName="bx:bx-log-out" focus={true} />
     </div>
   );
 }

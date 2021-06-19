@@ -2,7 +2,17 @@ import styles from "../styles/SidebarButton.module.scss";
 
 export default function SidebarButton(props) {
   return (
-    <div className={styles.main}>
+    <div
+      className={
+        styles.main +
+        " " +
+        (props.active
+          ? styles.active
+          : props.focus
+          ? styles.focus
+          : styles.bordered)
+      }
+    >
       {props.children}
       <span
         className="iconify"

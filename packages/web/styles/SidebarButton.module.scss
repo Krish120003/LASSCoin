@@ -1,11 +1,25 @@
 .main {
   width: 4em;
   height: 4em;
+  color: var(--prim-color-1);
   background-color: white;
   margin-bottom: 1.5em;
   border-radius: 0.5rem;
-  border: 0.12rem solid #dddddd;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.bordered {
+  border: 0.12rem solid #dddddd;
+}
+
+.active {
+  color: white;
+  background-color: var(--secondary-color-2);
+}
+
+.focus {
+  color: white;
+  background-color: var(--prim-color-1);
 }
