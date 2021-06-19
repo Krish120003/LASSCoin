@@ -7,14 +7,14 @@ export default function Sidebar() {
     <div className={styles.main}>
       <div>
         <span
-          class="iconify"
+          className="iconify"
           data-icon="akar-icons:coin"
           data-inline="false"
         ></span>
       </div>
       <SidebarButton>
         <span
-          class="iconify"
+          className="iconify"
           data-icon="akar-icons:home"
           data-inline="false"
         ></span>
