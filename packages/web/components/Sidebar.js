@@ -5,7 +5,7 @@ import SidebarButton from "./SidebarButton";
 export default function Sidebar() {
   return (
     <div className={styles.main}>
-      <div>
+      <div className={styles.logo}>
         <span
           className="iconify"
           data-icon="akar-icons:coin"
