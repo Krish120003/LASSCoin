@@ -1,3 +1,6 @@
+import { Icon, InlineIcon } from "@iconify/react";
+import coinIcon from "@iconify-icons/akar-icons/coin";
+
 import styles from "../styles/Sidebar.module.scss";
 
 import SidebarButton from "./SidebarButton";
