@@ -22,3 +22,7 @@
   margin: 0;
   color: var(--prim-color-1);
 }
+
+.button:hover {
+  box-shadow: 0px 0px 0px 0.1rem #ffffff;
+}

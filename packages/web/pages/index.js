@@ -7,11 +7,16 @@ import StatStack from "../components/StatStack";
 
 export default function Home() {
   return (
-    <div className={styles.layout}>
-      <div className={styles.top_section}>
-        <BalanceCard />
-        <StatStack />
+    <>
+      <Head>
+        <title>LASSCoin Home</title>
+      </Head>
+      <div className={styles.layout}>
+        <div className={styles.top_section}>
+          <BalanceCard />
+          <StatStack />
+        </div>
       </div>
-    </div>
+    </>
   );
 }
