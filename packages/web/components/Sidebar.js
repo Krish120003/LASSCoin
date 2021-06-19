@@ -20,6 +20,7 @@ export default function Sidebar() {
         iconName="radix-icons:activity-log"
         active={currentPage == 1}
       />
+      <div className={styles.spacer}></div>
       <SidebarButton iconName="bx:bx-log-out" focus={true} />
     </div>
   );
