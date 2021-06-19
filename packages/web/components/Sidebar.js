@@ -10,6 +10,8 @@ export default function Sidebar() {
           className="iconify"
           data-icon="akar-icons:coin"
           data-inline="false"
+          data-width="3em"
+          style={{ color: "#5C4E7A" }}
         ></span>
       </div>
       <SidebarButton>
