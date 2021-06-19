@@ -3,9 +3,14 @@
 
 export default function FileUploader() {
   return (
-    <div>
-     <p>e</p>
-    </div>
+    <form method="post" action="#" id="#">
+              <div class="form-group files">
+                <label>Upload Your File </label>
+                <input type="file" class="form-control" multiple=""/>
+              </div>
+              
+            <button> Submit </button>
+          </form>
   )
 }
 
