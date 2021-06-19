@@ -4,7 +4,6 @@ import styles from "../styles/index.module.scss";
 
 import BalanceCard from "../components/BalanceCard";
 import StatStack from "../components/StatStack";
-import fileUploader from "../components/fileUploader";
 
 export default function Home() {
   return (
