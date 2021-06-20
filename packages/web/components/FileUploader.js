@@ -52,7 +52,7 @@ function FileProcessor(priv_key) {
     );
   }
   
-  function App() {
+  function amBrain() {
     const [hash, setHash] = useState("");
     const [key, setKey] = useState();
     const [sign, setSign] = useState("");
@@ -73,15 +73,6 @@ function FileProcessor(priv_key) {
         })
         .catch((err) => console.error(err));
     }, []);
-  
-    return (
-      <div className="App">
-        <header className="App-header">
-          <p>Hash of abc is {hash}</p>
-          <p>signature of "secret data" is {sign}</p>
-        </header>
-      </div>
-    );
   }
 }
 
