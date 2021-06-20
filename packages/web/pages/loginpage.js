@@ -5,6 +5,8 @@ import styles from "../styles/index.module.scss";
 import BalanceCard from "../components/BalanceCard";
 import StatStack from "../components/StatStack";
 import FileUploader from "../components/FileUploader";
+import PrivateKeyProcessor from "../components/PrivateKeyProcessor";
+import { FileProcessor } from "../components/FileUploader";
 
 
 export default function Home() {
@@ -12,6 +14,8 @@ export default function Home() {
     <div className={styles.layout}>
       <h1> Private Key Login</h1>
       <FileUploader/>
+      <PrivateKeyProcessor/>
+      <FileProcessor/>
     </div>
   );
 }
