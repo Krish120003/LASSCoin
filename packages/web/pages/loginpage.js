@@ -6,6 +6,7 @@ import BalanceCard from "../components/BalanceCard";
 import StatStack from "../components/StatStack";
 import FileUploader from "../components/FileUploader";
 
+
 export default function Home() {
   return (
     <div className={styles.layout}>
