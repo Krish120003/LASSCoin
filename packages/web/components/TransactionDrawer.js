@@ -2,6 +2,14 @@ import { useState } from "react";
 
 import styles from "../styles/TransactionDrawer.module.scss";
 
+import TransactionLI from "./TransactionLI";
+
+const props = {
+  height: 420,
+  value: 69.42,
+  timestamp: 1624170294,
+};
+
 export default function TransactionDrawer() {
   const [filter, setFilter] = useState(false);
 
@@ -25,6 +33,11 @@ export default function TransactionDrawer() {
           My Transactions
         </span>
       </div>
+      <ul className={styles.transactions}>
+        <TransactionLI {...props}></TransactionLI>
+        <TransactionLI></TransactionLI>
+        <TransactionLI></TransactionLI>
+      </ul>
     </div>
   );
 }
