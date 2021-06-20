@@ -10,7 +10,7 @@ export default function TransactionLI(props) {
         <p>{formatDate(props.timestamp * 1000, "d MMM yyyy H:mm:ss")}</p>
       </span>
       <span className={styles.right}>
-        {props.value ? props.value.toFixed(14) : ""}
+        L$ {props.value ? props.value.toFixed(14) : ""}
       </span>
     </li>
   );

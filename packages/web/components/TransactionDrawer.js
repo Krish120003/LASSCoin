@@ -5,9 +5,9 @@ import styles from "../styles/TransactionDrawer.module.scss";
 import TransactionLI from "./TransactionLI";
 
 const props = {
-  height: 420,
-  value: 69.42,
-  timestamp: 1624170294,
+  height: 546546,
+  value: 32.4,
+  timestamp: 1624049721,
 };
 
 export default function TransactionDrawer() {
@@ -35,8 +35,10 @@ export default function TransactionDrawer() {
       </div>
       <ul className={styles.transactions}>
         <TransactionLI {...props}></TransactionLI>
-        <TransactionLI></TransactionLI>
-        <TransactionLI></TransactionLI>
+        <TransactionLI {...props}></TransactionLI>
+        <TransactionLI {...props}></TransactionLI>
+        <TransactionLI {...props}></TransactionLI>
+        <TransactionLI {...props}></TransactionLI>
       </ul>
     </div>
   );
