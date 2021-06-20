@@ -1,3 +1,5 @@
+$base-col: var(--prim-color-1);
+
 .main {
   width: 4em;
   height: 4em;
@@ -10,6 +12,10 @@
   align-items: center;
 }
 
+.main:hover {
+  box-shadow: 0.1rem 0.1rem 0.1rem rgba(0, 0, 0, 0.44);
+}
+
 .bordered {
   border: 0.12rem solid #dddddd;
 }
@@ -19,7 +25,15 @@
   background-color: var(--secondary-color-2);
 }
 
+.active:hover {
+  background-color: darken(#ff8872, 5%);
+}
+
 .focus {
   color: white;
   background-color: var(--prim-color-1);
+}
+
+.focus:hover {
+  background-color: lighten(#5c4e7a, 10%);
 }
