@@ -6,10 +6,24 @@ export default function TransactionDrawer() {
   const [filter, setFilter] = useState(false);
 
   return (
-    <div>
-      <div>
-        <span>Option 1</span>
-        <span>Option 2</span>
+    <div className={styles.main}>
+      <div className={styles.option_container}>
+        <span
+          className={filter ? "" : styles.active_option}
+          onClick={() => {
+            setFilter(false);
+          }}
+        >
+          Transactions
+        </span>
+        <span
+          className={!filter ? "" : styles.active_option}
+          onClick={() => {
+            setFilter(true);
+          }}
+        >
+          My Transactions
+        </span>
       </div>
     </div>
   );
