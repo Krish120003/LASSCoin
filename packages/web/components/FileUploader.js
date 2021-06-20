@@ -28,3 +28,12 @@ export default function FileUploader() {
     </div>
   );
 }
+
+
+export function FileProcessor() {
+  return (
+    <div>
+      <h1> Test </h1>
+    </div>
+  )
+}
