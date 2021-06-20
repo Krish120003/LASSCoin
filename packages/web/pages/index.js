@@ -5,6 +5,7 @@ import styles from "../styles/index.module.scss";
 import Sidebar from "../components/Sidebar";
 import BalanceCard from "../components/BalanceCard";
 import StatStack from "../components/StatStack";
+import TransactionDrawer from "../components/TransactionDrawer";
 
 export default function Home() {
   return (
@@ -17,6 +18,9 @@ export default function Home() {
         <div className={styles.top_section}>
           <BalanceCard />
           <StatStack />
+        </div>
+        <div>
+          <TransactionDrawer />
         </div>
       </div>
     </>
