@@ -33,7 +33,7 @@ export default function FileUploader() {
 export function FileProcessor() {
   return (
     <div>
-      <h1> Test </h1>
+      <h1> tEsT </h1>
     </div>
   )
 }
