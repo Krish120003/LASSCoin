@@ -1,5 +1,10 @@
 import { useState } from "react";
 
+
+function FileProcessor(key) {
+  alert(key);
+}
+
 export default function FileUploader() {
   const [key, setKey] = useState("");
 
@@ -19,7 +24,7 @@ export default function FileUploader() {
       <input
         type="file"
         onChange={(e) => {
-          readFile(e);
+          readFile(e).then(() =>{FileProcessor(key)});
         }}
       />
       <p>
@@ -29,11 +34,3 @@ export default function FileUploader() {
   );
 }
 
-
-export function FileProcessor() {
-  return (
-    <div>
-      <h1> tEsT </h1>
-    </div>
-  )
-}
