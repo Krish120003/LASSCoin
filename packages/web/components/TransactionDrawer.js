@@ -35,7 +35,7 @@ export default function TransactionDrawer() {
       </div>
       <ul className={styles.transactions}>
         <TransactionLI {...props}></TransactionLI>
-        <TransactionLI {...props}></TransactionLI>
+        <TransactionLI {...props} self={true}></TransactionLI>
         <TransactionLI {...props}></TransactionLI>
         <TransactionLI {...props}></TransactionLI>
         <TransactionLI {...props}></TransactionLI>
