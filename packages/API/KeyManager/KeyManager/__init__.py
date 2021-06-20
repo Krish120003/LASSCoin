@@ -18,7 +18,7 @@ def save_key(key, path):
     Saves the private key as a binary file.
     """
     with open(os.path.join(path, "private.key"), "wb") as f:
-        f.write(key.export_key())
+        f.write(key.export_key(pkcs=8))
 
 
 def load_key(path):
