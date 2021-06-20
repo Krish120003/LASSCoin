@@ -19,3 +19,12 @@
   font-size: 1.05em;
   transition: all 0.05s linear;
 }
+
+.transactions {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  margin-bottom: -8em;
+  height: 37.5vh;
+  background-color: red;
+}
