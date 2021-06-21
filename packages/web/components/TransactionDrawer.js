@@ -35,7 +35,7 @@ export default function TransactionDrawer() {
         </span>
       </div>
       <ul className={styles.transactions}>
-        {transactions.map((element) => {
+        {transactions.slice(0, 5).map((element) => {
           console.log("H", element);
           return <TransactionLI {...element} />;
         })}
