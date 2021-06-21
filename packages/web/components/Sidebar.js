@@ -1,11 +1,11 @@
 import Router from "next/router";
-
+import { useState } from "react";
 import styles from "../styles/Sidebar.module.scss";
 
 import SidebarButton from "./SidebarButton";
 
 export default function Sidebar() {
-  const currentPage = 0;
+  const [currentPage, setCurrentPage] = useState(0);
   return (
     <div className={styles.main}>
       <div className={styles.logo}>
