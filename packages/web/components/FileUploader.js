@@ -81,8 +81,6 @@ async function FileProcessor(priv_key) {
   const formattedKey = priv_key.split("\n").reduce((x,y) => {return x+y});
   const x = await importPrivateKey(formattedKey).catch((err) => console.error(err));
   console.log(x);
-  
-
 }
 
 export default function FileUploader() {
@@ -97,6 +95,23 @@ export default function FileUploader() {
     };
     file_reader.readAsText(e.target.files[0]);
   };
+
+function GeneratePublicKey (
+  let keypair = window.crypto.subtle.generateKey(
+    {
+      name: "RSA-OAEP",
+      modulusLength: 4096,
+      publicExponent: new Uint8Array([1, 0, 1]),
+      hash: "SHA-256"
+    },
+    true,
+    ["encrypt", "decrypt"]
+  ).then((keyPair) => {
+    const encryptButton = document.querySelector(".rsa-oaep .encrypt-button");
+    encryptButton.addEventListener("click", () => {
+      encryptMessage(keyPair.publicKey);
+    });
+  )
 
   return (
     <div>
