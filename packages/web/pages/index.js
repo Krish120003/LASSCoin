@@ -1,9 +1,7 @@
 import Head from "next/head";
 import Modal from "react-modal";
-import { useEffect } from "react";
 
-import { useSelector, useDispatch } from "react-redux";
-
+import { useDispatch } from "react-redux";
 
 import styles from "../styles/index.module.scss";
 
