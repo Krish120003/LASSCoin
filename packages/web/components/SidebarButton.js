@@ -12,6 +12,7 @@ export default function SidebarButton(props) {
           ? styles.focus
           : styles.bordered)
       }
+      onClick={props.onClick}
     >
       {props.children}
       <span

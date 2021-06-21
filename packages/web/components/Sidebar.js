@@ -1,3 +1,5 @@
+import Router from "next/router";
+
 import styles from "../styles/Sidebar.module.scss";
 
 import SidebarButton from "./SidebarButton";
@@ -21,7 +23,13 @@ export default function Sidebar() {
         active={currentPage == 1}
       />
       <div className={styles.spacer}></div>
-      <SidebarButton iconName="bx:bx-log-out" focus={true} />
+      <SidebarButton
+        iconName="bx:bx-log-out"
+        focus={true}
+        onClick={() => {
+          Router.reload(window.location.pathname);
+        }}
+      />
     </div>
   );
 }
