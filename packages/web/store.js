@@ -1,18 +1,12 @@
-import { createStore } from "redux";
+import { applyMiddleware, createStore } from "redux";
 
 const initialState = {
   transactions: [],
   nextTransaction: null,
 };
 
-const reducer = (state = initialState, action) => {
-  switch (action.type) {
-    case "GET_TRANSACTIONS":
-      const newTransactions = [...state.transactions];
-      let newNext = null;
-      if (state.nextTransaction != null) {
-      } else {
-        fetch("https://lasscoin.herokuapp.com/api/transactions/").then(
+/*
+fetch("https://lasscoin.herokuapp.com/api/transactions/").then(
           (res) => {
             res.json().then((data) => {
               newNext = data.next ? data.next : null;
@@ -21,19 +15,33 @@ const reducer = (state = initialState, action) => {
               });
             });
           }
-        );
-        newTransactions;
-      }
+        );*/
+
+const loggerMiddleware = (store) => (next) => (action) => {
+  console.log("Performing Action:", action.type);
+  if (action.type == "GET_TRANSACTIONS") {
+    fetch("https://lasscoin.herokuapp.com/api/transactions/").then((res) => {
+      res.json().then((data) => {
+        next({ ...action, payload: data });
+      });
+    });
+  } else {
+  }
+};
+
+const reducer = (state = initialState, action) => {
+  switch (action.type) {
+    case "GET_TRANSACTIONS":
       return {
         ...state,
-        transactions: newTransactions,
-        nextTransaction: newNext,
+        transactions: [...state.transactions, ...action.payload.data],
+        next: action.payload.next,
       };
     default:
       return state;
   }
 };
 
-const store = createStore(reducer);
+const store = createStore(reducer, applyMiddleware(loggerMiddleware));
 
 export default store;
