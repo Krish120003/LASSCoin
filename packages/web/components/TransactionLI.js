@@ -15,7 +15,7 @@ export default function TransactionLI(props) {
         </div>
         <div className={styles.left_text}>
           <h6>Height {props.height}</h6>
-          <p>{formatDate(props.timestamp * 1000, "d MMM yyyy H:mm:ss")}</p>
+          <p>{formatDate(props.time * 1000, "d MMM yyyy H:mm:ss")}</p>
         </div>
       </span>
       <span className={styles.right}>
