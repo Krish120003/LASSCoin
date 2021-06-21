@@ -116,6 +116,11 @@ def chain_height(db: Session = Depends(get_db)):
     return {"height": db.query(Transaction).count()}
 
 
+@app.get("/api/transactions/pending/")
+def pending_blocks(db: Session = Depends(get_db)):
+    return {"pending": db.query(PendingTransaction).count()}
+
+
 @app.get("/api/miner/")
 def miner_block_request(db: Session = Depends(get_db)):
     """
