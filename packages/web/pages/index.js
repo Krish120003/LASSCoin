@@ -15,9 +15,9 @@ import LoadCreateKey from "../components/LoadCreateKey";
 
 export default function Home() {
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch({ type: "GET_TRANSACTIONS" });
-  }, []);
+
+  dispatch({ type: "GET_TRANSACTIONS" });
+
 
   return (
     <>
