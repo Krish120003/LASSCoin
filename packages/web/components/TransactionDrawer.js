@@ -7,7 +7,6 @@ import TransactionLI from "./TransactionLI";
 
 function TransactionDrawer(props) {
   const [filter, setFilter] = useState(false);
-  console.log(props.transactions.length)
   return (
     <div className={styles.main}>
       <div className={styles.option_container}>
@@ -30,7 +29,6 @@ function TransactionDrawer(props) {
       </div>
       <ul className={styles.transactions}>
         {props.transactions.slice(0, 5).map((element) => {
-          console.log("H", element);
           return <TransactionLI {...element} />;
         })}
       </ul>
@@ -39,6 +37,6 @@ function TransactionDrawer(props) {
 }
 
 function mapStateToProps(state) {
-  return {transactions: state.transactions}
+  return { transactions: state.transactions };
 }
-export default connect(mapStateToProps)(TransactionDrawer)
+export default connect(mapStateToProps)(TransactionDrawer);
