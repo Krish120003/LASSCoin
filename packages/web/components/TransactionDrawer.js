@@ -1,16 +1,13 @@
 import { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch, connect } from "react-redux";
 
 import styles from "../styles/TransactionDrawer.module.scss";
 
 import TransactionLI from "./TransactionLI";
 
-export default function TransactionDrawer() {
+function TransactionDrawer(props) {
   const [filter, setFilter] = useState(false);
-
-
-  const transactions = useSelector((state) => state.transactions);
-
+  console.log(props.transactions.length)
   return (
     <div className={styles.main}>
       <div className={styles.option_container}>
@@ -32,7 +29,7 @@ export default function TransactionDrawer() {
         </span>
       </div>
       <ul className={styles.transactions}>
-        {transactions.slice(0, 5).map((element) => {
+        {props.transactions.slice(0, 5).map((element) => {
           console.log("H", element);
           return <TransactionLI {...element} />;
         })}
@@ -40,3 +37,8 @@ export default function TransactionDrawer() {
     </div>
   );
 }
+
+function mapStateToProps(state) {
+  return {transactions: state.transactions}
+}
+export default connect(mapStateToProps)(TransactionDrawer)
