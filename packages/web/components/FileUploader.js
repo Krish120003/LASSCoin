@@ -96,22 +96,37 @@ export default function FileUploader() {
     file_reader.readAsText(e.target.files[0]);
   };
 
-function GeneratePublicKey (
-  let keypair = window.crypto.subtle.generateKey(
+async function GeneratePublicKey () {
+
+  const keys = await crypto.subtle.generateKey(
+    
     {
-      name: "RSA-OAEP",
-      modulusLength: 4096,
-      publicExponent: new Uint8Array([1, 0, 1]),
-      hash: "SHA-256"
+      name: 'RSA-OAEP',
+      modulusLength: 2048,
+      publicExponent: new Uint8Array([0x01, 0x00, 0x01]),
+      hash: { name: 'SHA-512' },
     },
     true,
-    ["encrypt", "decrypt"]
-  ).then((keyPair) => {
-    const encryptButton = document.querySelector(".rsa-oaep .encrypt-button");
-    encryptButton.addEventListener("click", () => {
-      encryptMessage(keyPair.publicKey);
-    });
-  )
+    ['encrypt', 'decrypt', 'wrapKey', 'unwrapKey'],
+  );
+  
+  // export private key to JWK
+  const jwk = await crypto.subtle.exportKey("jwk", keys.privateKey);
+  
+  // remove private data from JWK
+  delete jwk.d;
+  delete jwk.dp;
+  delete jwk.dq;
+  delete jwk.q;
+  delete jwk.qi;
+  jwk.key_ops = ["encrypt", "wrapKey"];
+
+  // import public key
+  const publicKey = await crypto.subtle.importKey("jwk", jwk, { name: "RSA-OAEP", 
+  hash: "SHA-512" }, true, ["encrypt", "wrapKey"]);
+  
+  console.log(publicKey)
+}
 
   return (
     <div>
@@ -120,6 +135,7 @@ function GeneratePublicKey (
         type="file"
         onChange={(e) => {
           readFile(e);
+          GeneratePublicKey();
         }}
       />
       <p>
