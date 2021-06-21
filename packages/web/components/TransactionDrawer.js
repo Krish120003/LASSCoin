@@ -7,10 +7,7 @@ import TransactionLI from "./TransactionLI";
 
 export default function TransactionDrawer() {
   const [filter, setFilter] = useState(false);
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch({ type: "GET_TRANSACTIONS" });
-  }, []);
+
 
   const transactions = useSelector((state) => state.transactions);
 

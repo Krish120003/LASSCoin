@@ -1,5 +1,9 @@
 import Head from "next/head";
 import Modal from "react-modal";
+import { useEffect } from "react";
+
+import { useSelector, useDispatch } from "react-redux";
+
 
 import styles from "../styles/index.module.scss";
 
@@ -10,6 +14,11 @@ import TransactionDrawer from "../components/TransactionDrawer";
 import LoadCreateKey from "../components/LoadCreateKey";
 
 export default function Home() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch({ type: "GET_TRANSACTIONS" });
+  }, []);
+
   return (
     <>
       <Head>
