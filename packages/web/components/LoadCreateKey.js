@@ -8,8 +8,22 @@ export default function LoadCreateKey() {
       </div>
 
       <div className={styles.content}>
-        <div className={styles.load_btn}></div>
-        <div className={styles.create_btn}></div>
+        <div className={styles.load_btn}>
+          <span
+            class="iconify"
+            data-icon="bi:cloud-upload"
+            data-inline="false"
+          ></span>
+          <h3>LOAD KEY</h3>
+        </div>
+        <div className={styles.create_btn}>
+          <span
+            class="iconify"
+            data-icon="ic:outline-vpn-key"
+            data-inline="false"
+          ></span>
+          <h3>CREATE KEY</h3>
+        </div>
       </div>
     </div>
   );
