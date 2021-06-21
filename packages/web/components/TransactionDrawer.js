@@ -29,7 +29,7 @@ function TransactionDrawer(props) {
       </div>
       <ul className={styles.transactions}>
         {props.transactions.slice(0, 5).map((element) => {
-          return <TransactionLI {...element} />;
+          return <TransactionLI key={element.uuid} {...element} />;
         })}
       </ul>
     </div>
