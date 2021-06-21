@@ -5,17 +5,6 @@ const initialState = {
   nextTransaction: null,
 };
 
-/*
-fetch("https://lasscoin.herokuapp.com/api/transactions/").then(
-          (res) => {
-            res.json().then((data) => {
-              newNext = data.next ? data.next : null;
-              data.data.forEach((element) => {
-                newTransactions.push(element);
-              });
-            });
-          }
-        );*/
 
 const loggerMiddleware = (store) => (next) => (action) => {
   console.log("Performing Action:", action.type);
