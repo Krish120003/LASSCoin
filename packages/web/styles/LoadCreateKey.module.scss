@@ -14,6 +14,24 @@
   text-align: left;
   margin-bottom: 2rem;
   width: 50rem;
+
+  background-image: gradient(
+    linear,
+    left top,
+    right top,
+    color-stop(0, #f22),
+    color-stop(0.15, #f2f),
+    color-stop(0.3, #22f),
+    color-stop(0.45, #2ff),
+    color-stop(0.6, #2f2),
+    color-stop(0.75, #2f2),
+    color-stop(0.9, #ff2),
+    color-stop(1, #f22)
+  );
+
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: hue 10s infinite linear;
 }
 
 .content {
@@ -23,4 +41,34 @@
   border-radius: 3em;
   background-color: white;
   box-shadow: 0 0 4em rgba($color: #000000, $alpha: 0.2);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1em 2.5em;
+}
+
+@keyframes hue {
+  from {
+    -webkit-filter: hue-rotate(0deg);
+  }
+  to {
+    -webkit-filter: hue-rotate(-360deg);
+  }
+}
+
+.btn {
+  height: 90%;
+  width: 47.5%;
+
+  border-radius: 2em;
+}
+
+.load_btn {
+  @extend .btn;
+  background-color: var(--secondary-color-2);
+}
+
+.create_btn {
+  @extend .btn;
+  background-color: #7c68a6;
 }
