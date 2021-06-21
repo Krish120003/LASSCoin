@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { useSelector, useDispatch, connect } from "react-redux";
+import { useState } from "react";
+import { connect } from "react-redux";
 
 import styles from "../styles/TransactionDrawer.module.scss";
 
