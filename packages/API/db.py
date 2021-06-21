@@ -7,7 +7,7 @@ from sqlalchemy.orm import sessionmaker
 
 from sqlalchemy import Column, Integer, String, Float, DateTime
 
-SQLALCHEMY_DATABASE_URI = os.getenv("DB_CONN")
+SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL")
 
 engine = create_engine(SQLALCHEMY_DATABASE_URI)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
