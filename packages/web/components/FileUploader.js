@@ -52,13 +52,13 @@ async function FileProcessor(priv_key) {
   async function GeneratePublicKey(privKEY) {
     const keys = await crypto.subtle.generateKey(
       {
-        name: "RSA-OAEP",
+        name: "RSASSA-PKCS1-v1_5",
         modulusLength: 2048,
         publicExponent: new Uint8Array([0x01, 0x00, 0x01]),
-        hash: { name: "SHA-512" },
+        hash: { name: "SHA-256" },
       },
       true,
-      ["encrypt", "decrypt", "wrapKey", "unwrapKey"]
+      ["sign", "verify"]
     );
 
     console.log(privKEY, keys.privateKey)
