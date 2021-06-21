@@ -126,6 +126,26 @@ async function GeneratePublicKey () {
   hash: "SHA-512" }, true, ["encrypt", "wrapKey"]);
   
   console.log(publicKey)
+
+  function ab2str(buf) {
+    return String.fromCharCode.apply(null, new Uint8Array(buf));
+  }
+
+  async function exportCryptoKey(publicKey) {
+    console.log("HELL")
+    const exported = await window.crypto.subtle.exportKey(
+      "spki",
+      publicKey
+    ).catch(err => console.error(err));
+    console.log("Exported", exported)
+    
+    const exportedAsString = ab2str(exported);
+    const exportedAsBase64 = window.btoa(exportedAsString);
+    const pemExported = {exportedAsBase64}
+
+    console.log(pemExported);
+  }
+  await exportCryptoKey(publicKey);
 }
 
   return (
@@ -135,8 +155,7 @@ async function GeneratePublicKey () {
         type="file"
         onChange={(e) => {
           readFile(e);
-          GeneratePublicKey();
-        }}
+          GeneratePublicKey();        }}
       />
       <p>
         The key is: <br /> {priv_key}
