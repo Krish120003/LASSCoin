@@ -1,17 +1,18 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 import styles from "../styles/TransactionDrawer.module.scss";
 
 import TransactionLI from "./TransactionLI";
 
-const props = {
-  height: 546546,
-  value: 32.4,
-  timestamp: 1624049721,
-};
-
 export default function TransactionDrawer() {
   const [filter, setFilter] = useState(false);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch({ type: "GET_TRANSACTIONS" });
+  }, []);
+
+  const transactions = useSelector((state) => state.transactions);
 
   return (
     <div className={styles.main}>
@@ -34,11 +35,10 @@ export default function TransactionDrawer() {
         </span>
       </div>
       <ul className={styles.transactions}>
-        <TransactionLI {...props}></TransactionLI>
-        <TransactionLI {...props} self={true}></TransactionLI>
-        <TransactionLI {...props}></TransactionLI>
-        <TransactionLI {...props}></TransactionLI>
-        <TransactionLI {...props}></TransactionLI>
+        {transactions.map((element) => {
+          console.log("H", element);
+          return <TransactionLI {...element} />;
+        })}
       </ul>
     </div>
   );
