@@ -3,6 +3,8 @@ import { applyMiddleware, createStore } from "redux";
 const initialState = {
   transactions: [],
   nextTransaction: null,
+  height: 1,
+  pendingBlocks:0
 };
 
 
