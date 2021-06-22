@@ -19,6 +19,13 @@ function Home(props) {
   dispatch({ type: "GET_PENDING" });
   dispatch({ type: "GET_BALANCE_DETAILS" });
 
+  setInterval(() => {
+    dispatch({ type: "GET_TRANSACTIONS" });
+    dispatch({ type: "GET_HEIGHT" });
+    dispatch({ type: "GET_PENDING" });
+    dispatch({ type: "GET_BALANCE_DETAILS" });
+  }, 10000);
+
   return (
     <>
       <Head>
