@@ -102,9 +102,9 @@ def create_transaction(
 
 
 @app.get("/api/transactions/balance/", status_code=200)
-def account_balance(data: AddressContext, db: Session = Depends(get_db)):
+def account_balance(address: str, db: Session = Depends(get_db)):
     try:
-        balance = util.get_balance(db, data.address)
+        balance = util.get_balance(db, address)
     except Exception as e:
         print(e)
         return {"balance": "N/A"}
@@ -119,6 +119,20 @@ def chain_height(db: Session = Depends(get_db)):
 @app.get("/api/transactions/pending/")
 def pending_blocks(db: Session = Depends(get_db)):
     return {"pending": db.query(PendingTransaction).count()}
+
+
+@app.get("/api/transactions/balance/mined/")
+def lifetime_mined(address: str, db: Session = Depends(get_db)):
+    return {"balance": db.query(Transaction).filter_by(miner=address).count() * 5}
+
+
+@app.get("/api/transactions/balance/received/")
+def lifetime_received(address: str, db: Session = Depends(get_db)):
+    return {
+        "balance": sum(
+            [x.value for x in db.query(Transaction).filter_by(target=address)]
+        )
+    }
 
 
 @app.get("/api/miner/")
