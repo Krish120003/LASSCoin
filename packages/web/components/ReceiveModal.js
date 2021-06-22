@@ -1,6 +1,9 @@
+import { connect } from "react-redux";
+
 import styles from "../styles/ReceiveModal.module.scss";
 
-export default function ReceiveModal() {
+function ReceiveModal(props) {
+  console.log(props);
   return (
     <div className={styles.main}>
       <div className={styles.content}>
@@ -8,7 +11,7 @@ export default function ReceiveModal() {
           <h3>Receive LASSCoin</h3>
           <div className={styles.address_box}>
             <div id="public_key_copy" className={styles.key_box}>
-              MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxhrRjWzQUKHLOve5TPOd3dE0WUg1gSws9bdT1U2yBxBRGZevxSIe1R25E9TcbMCim8pj1fPjmJh0Z3RsDuOxQxFQe
+              {props.public_key}
             </div>
             <div
               className={styles.copy_button}
@@ -48,3 +51,7 @@ export default function ReceiveModal() {
     </div>
   );
 }
+function mapStateToProps(state) {
+  return { public_key: state.public_key };
+}
+export default connect(mapStateToProps)(ReceiveModal);
