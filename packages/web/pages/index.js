@@ -23,7 +23,7 @@ export default function Home() {
       <Head>
         <title>LASSCoin Home</title>
       </Head>
-      <Modal isOpen={false} ariaHideApp={false} className={styles.modal_style}>
+      <Modal isOpen={true} ariaHideApp={false} className={styles.modal_style}>
         <LoadCreateKey />
       </Modal>
       <div className={styles.layout}>

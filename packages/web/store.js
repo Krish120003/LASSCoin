@@ -9,7 +9,7 @@ const initialState = {
   pendingBlocks: 0,
 };
 
-const loggerMiddleware = (store) => (next) => (action) => {
+const fetcherMiddleware = (store) => (next) => (action) => {
   console.log("Performing Action:", action.type);
   if (action.type == "GET_TRANSACTIONS") {
     fetch(API_URL + "/transactions/").then((res) => {
@@ -57,6 +57,6 @@ const reducer = (state = initialState, action) => {
   }
 };
 
-const store = createStore(reducer, applyMiddleware(loggerMiddleware));
+const store = createStore(reducer, applyMiddleware(fetcherMiddleware));
 
 export default store;
