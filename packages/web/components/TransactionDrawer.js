@@ -28,18 +28,29 @@ function TransactionDrawer(props) {
         </span>
       </div>
       <ul className={styles.transactions}>
-        {props.transactions.slice(0, 5).map((element) => {
-          return (
-            <TransactionLI
-              key={element.uuid}
-              {...element}
-              self={
-                element.sender === props.public_key ||
-                element.target === props.public_key
-              }
-            />
-          );
-        })}
+        {props.transactions
+          .filter((t) => {
+            if (!filter) {
+              return true;
+            } else {
+              return (
+                t.sender === props.public_key || t.target === props.public_key
+              );
+            }
+          })
+          .slice(0, 5)
+          .map((element) => {
+            return (
+              <TransactionLI
+                key={element.uuid}
+                {...element}
+                self={
+                  element.sender === props.public_key ||
+                  element.target === props.public_key
+                }
+              />
+            );
+          })}
       </ul>
     </div>
   );
