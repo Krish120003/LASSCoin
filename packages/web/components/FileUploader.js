@@ -1,6 +1,7 @@
 import { useState, useEffect, useHistory } from "react";
 import "crypto";
 
+//uploader for the file
 async function FileProcessor(priv_key) {
   async function digestMessage(message) {
     const msgUint8 = new TextEncoder().encode(message); // encode as (utf-8) Uint8Array
@@ -21,13 +22,13 @@ async function FileProcessor(priv_key) {
     return buf;
   }
 
-  function importPrivateKey(pem) {
-    // fetch the part of the PEM string between header and footer
+  function importPrivateKey(privateKeyText) {
+    // fetch the part of the privateKeyText string between header and footer
     const pemHeader = "-----BEGIN PRIVATE KEY-----";
     const pemFooter = "-----END PRIVATE KEY-----";
-    const pemContents = pem.substring(
+    const pemContents = privateKeyText.substring(
       pemHeader.length,
-      pem.length - pemFooter.length
+      privateKeyText.length - pemFooter.length
     );
     // base64 decode the string to get the binary data
     const binaryDerString = window.atob(pemContents);
@@ -49,7 +50,7 @@ async function FileProcessor(priv_key) {
     );
   }
 
-  async function GeneratePublicKey(privKEY) {
+  async function GeneratePublicKey(privateKey) {
     const keys = await crypto.subtle.generateKey(
       {
         name: "RSASSA-PKCS1-v1_5",
@@ -61,10 +62,10 @@ async function FileProcessor(priv_key) {
       ["sign", "verify"]
     );
 
-    console.log(privKEY, keys.privateKey)
+    console.log(privateKey, keys.privateKey)
 
     // export private key to JWK
-    const jwk = await crypto.subtle.exportKey("jwk", privKEY).catch(
+    const jwk = await crypto.subtle.exportKey("jwk", privateKey).catch(
       err => console.error(err)
     );
 
