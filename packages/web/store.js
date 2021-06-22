@@ -1,5 +1,5 @@
 import { applyMiddleware, createStore } from "redux";
-import { getPublicKeyAsText } from "./util/Crypto";
+import { getPublicKey } from "./util/Crypto";
 
 const API_URL = "https://lasscoin.herokuapp.com/api";
 
@@ -32,6 +32,11 @@ const fetcherMiddleware = (store) => (next) => (action) => {
         next({ ...action, payload: data });
       });
     });
+  } else if (action.type == "SET_PRIV_KEY") {
+    getPublicKey(action.payload.key).then((res) => {
+      action.payload = { ...action.payload, public_key: res };
+      next(action);
+    });
   } else {
     next(action);
   }
@@ -59,7 +64,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         private_key: action.payload.key,
-        public_key: getPublicKeyAsText(action.payload.key)
+        public_key: action.payload.public_key,
       };
     default:
       return state;
