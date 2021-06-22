@@ -12,6 +12,9 @@
   color: #bbbbbb;
   border-bottom: 0.1em solid #bbbbbb;
   padding-bottom: 0.5em;
+  span {
+    cursor: pointer;
+  }
 }
 
 .active_option {
