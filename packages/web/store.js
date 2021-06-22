@@ -7,6 +7,7 @@ const initialState = {
   nextTransaction: null,
   height: 0,
   pendingBlocks: 0,
+  private_key: null,
 };
 
 const fetcherMiddleware = (store) => (next) => (action) => {
@@ -51,6 +52,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         pendingBlocks: action.payload.pending,
+      };
+    case "SET_PRIV_KEY":
+      return {
+        ...state,
+        private_key: action.payload.key,
       };
     default:
       return state;

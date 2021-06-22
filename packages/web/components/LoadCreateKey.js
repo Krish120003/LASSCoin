@@ -1,15 +1,18 @@
-import {importPrivateKey} from "../util/Crypto"
+import { importPrivateKey } from "../util/Crypto";
+import { useDispatch } from "react-redux";
 
 import styles from "../styles/LoadCreateKey.module.scss";
 
 export default function LoadCreateKey() {
+  const dispatch = useDispatch();
+
   const load_key = async (event) => {
     event.preventDefault();
     const file_reader = new FileReader();
     file_reader.onload = async (event) => {
       console.log(event.target.result);
       const key = await importPrivateKey(event.target.result);
-      console.log(key);
+      dispatch({ key: key });
     };
     file_reader.readAsText(event.target.files[0]);
   };
@@ -39,7 +42,9 @@ export default function LoadCreateKey() {
             className={styles.hidden_cover_input}
             id="load_key_dialog"
             type="file"
-            onChange={(event) => {load_key(event)}}
+            onChange={(event) => {
+              load_key(event);
+            }}
           ></input>
         </div>
         <div className={styles.create_btn}>
