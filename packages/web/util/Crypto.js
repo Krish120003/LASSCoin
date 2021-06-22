@@ -151,7 +151,9 @@ async function signMessage(message, key) {
     key,
     Buffer.from(message)
   );
-  return btoa(String.fromCharCode.apply(null, new Uint8Array(sign_bytes)));
+  return window.btoa(
+    String.fromCharCode.apply(null, new Uint8Array(sign_bytes))
+  );
 }
 
 module.exports = {
