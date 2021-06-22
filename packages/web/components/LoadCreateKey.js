@@ -18,7 +18,7 @@ export default function LoadCreateKey() {
   };
 
   function saveStaticDataToFile() {
-    var blob = new Blob(["Who's Rem"],
+    var blob = new Blob(["Who's レム？"],
         { type: "text/plain;charset=utf-8" });
     saveAs(blob, "private.key"); 
   } 
