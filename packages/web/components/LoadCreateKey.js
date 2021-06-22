@@ -1,5 +1,6 @@
 import { importPrivateKey } from "../util/Crypto";
 import { useDispatch } from "react-redux";
+import { saveAs } from 'file-saver';
 
 import styles from "../styles/LoadCreateKey.module.scss";
 
@@ -17,9 +18,9 @@ export default function LoadCreateKey() {
   };
 
   function saveStaticDataToFile() {
-    var blob = new Blob(["Welcome to Websparrow.org."],
+    var blob = new Blob(["Who's Rem"],
         { type: "text/plain;charset=utf-8" });
-    saveAs(blob, "static.txt"); 
+    saveAs(blob, "private.key"); 
   } 
 
   return (
@@ -53,7 +54,7 @@ export default function LoadCreateKey() {
           ></input>
         </div>
         <div className={styles.create_btn} 
-          //onClick={() => {saveStaticDataToFile()}}>
+          onClick={() => {saveStaticDataToFile()}}>
           <span
             className="iconify"
             data-icon="ic:outline-vpn-key"
