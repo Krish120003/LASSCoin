@@ -12,8 +12,6 @@ function BalanceCard(props) {
   const [receiveModalOpen, setReceiveModalOpen] = useState(false);
   const [sendModalOpen, setSendModalOpen] = useState(false);
 
-  console.log("x", props, props.balance);
-
   return (
     <>
       <Modal
@@ -46,12 +44,12 @@ function BalanceCard(props) {
             <TextColumnGroup
               class={styles.mini_text_column}
               title="Lifetime Mined"
-              value={3.25}
+              value={props.mined}
             />
             <TextColumnGroup
               class={styles.mini_text_column}
               title="Lifetime Received"
-              value={0.00002}
+              value={props.received}
             />
           </div>
         </div>
@@ -77,6 +75,10 @@ function BalanceCard(props) {
 }
 
 function mapStateToProps(state) {
-  return { balance: state.balance };
+  return {
+    balance: state.balance,
+    mined: state.mined,
+    received: state.received,
+  };
 }
 export default connect(mapStateToProps)(BalanceCard);
