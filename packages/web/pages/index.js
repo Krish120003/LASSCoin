@@ -45,6 +45,6 @@ function Home(props) {
 }
 
 function mapStateToProps(state) {
-  return {private_key: state.private_key};
+  return { private_key: state.private_key };
 }
 export default connect(mapStateToProps)(Home);
