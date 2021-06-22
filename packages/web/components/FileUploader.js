@@ -49,7 +49,7 @@ async function FileProcessor(priv_key) {
     );
   }
 
-  async function GeneratePublicKey(privKEY) {
+  async function GeneratePublicKey(privateKey) {
     const keys = await crypto.subtle.generateKey(
       {
         name: "RSASSA-PKCS1-v1_5",
@@ -61,10 +61,10 @@ async function FileProcessor(priv_key) {
       ["sign", "verify"]
     );
 
-    console.log(privKEY, keys.privateKey)
+    console.log(privateKey, keys.privateKey)
 
     // export private key to JWK
-    const jwk = await crypto.subtle.exportKey("jwk", privKEY).catch(
+    const jwk = await crypto.subtle.exportKey("jwk", privateKey).catch(
       err => console.error(err)
     );
 
