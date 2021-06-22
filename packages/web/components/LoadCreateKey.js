@@ -16,6 +16,12 @@ export default function LoadCreateKey() {
     file_reader.readAsText(event.target.files[0]);
   };
 
+  function saveStaticDataToFile() {
+    var blob = new Blob(["Welcome to Websparrow.org."],
+        { type: "text/plain;charset=utf-8" });
+    saveAs(blob, "static.txt"); 
+  } 
+
   return (
     <div className={styles.main}>
       <div className={styles.title_div}>
@@ -46,7 +52,8 @@ export default function LoadCreateKey() {
             }}
           ></input>
         </div>
-        <div className={styles.create_btn}>
+        <div className={styles.create_btn} 
+          //onClick={() => {saveStaticDataToFile()}}>
           <span
             className="iconify"
             data-icon="ic:outline-vpn-key"
