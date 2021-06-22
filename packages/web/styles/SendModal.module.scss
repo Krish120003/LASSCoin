@@ -1,0 +1,16 @@
+.main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  flex-direction: column;
+}
+.content {
+  pointer-events: all;
+  background-color: white;
+  width: 50%;
+  height: 15em;
+  border-radius: 3em;
+  box-shadow: 0 0 4em rgba($color: #000000, $alpha: 0.2);
+  padding: 2.5rem;
+}

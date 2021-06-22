@@ -6,6 +6,7 @@ import styles from "../styles/Balance.module.scss";
 import TextColumnGroup from "./TextColumnGroup";
 import BalanceCardButton from "./BalanceCardButton";
 import ReceiveModal from "./ReceiveModal";
+import SendModal from "./SendModal";
 
 export default function BalanceCard() {
   const [receiveModalOpen, setReceiveModalOpen] = useState(false);
@@ -29,7 +30,7 @@ export default function BalanceCard() {
         shouldCloseOnOverlayClick={true}
         onRequestClose={() => setSendModalOpen(false)}
       >
-        x
+        <SendModal />
       </Modal>
       <div className={`${styles.balance_card} flex_margin`}>
         <h3 className={styles.thold_title}>Balance Details</h3>
