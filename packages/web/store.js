@@ -95,7 +95,9 @@ const reducer = (state = initialState, action) => {
     case "GET_TRANSACTIONS":
       return {
         ...state,
-        transactions: [...state.transactions, ...action.payload.data],
+        transactions: Array.from(
+          new Set([...state.transactions, ...action.payload.data])
+        ),
         next: action.payload.next,
       };
     case "GET_HEIGHT":
