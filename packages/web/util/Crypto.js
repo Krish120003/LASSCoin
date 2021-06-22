@@ -132,9 +132,36 @@ async function getPublicKeyAsText(publicKey) {
   return pemExported;
 }
 
+async function generatePrivateKey() {
+    const keys = await crypto.subtle.generateKey(
+        {
+          name: "RSASSA-PKCS1-v1_5",
+          modulusLength: 2048,
+          publicExponent: new Uint8Array([0x01, 0x00, 0x01]),
+          hash: { name: "SHA-256" },
+        },
+        true,
+        ["sign", "verify"]
+      );
+    return keys.privateKey;
+}
+
+async function exportPrivatePem(key) {
+  const exported = await window.crypto.subtle.exportKey(
+    "pkcs8",
+    key
+  );
+  const exportedAsString = ab2str(exported);
+  const exportedAsBase64 = window.btoa(exportedAsString);
+  const pemExported = `-----BEGIN PRIVATE KEY-----\n${exportedAsBase64}\n-----END PRIVATE KEY-----`;
+  return pemExported;
+}
+
 module.exports = {
   generateUUID4String,
   importPrivateKey,
   getPublicKey,
   getPublicKeyAsText,
+  generatePrivateKey,
+  exportPrivatePem
 };
