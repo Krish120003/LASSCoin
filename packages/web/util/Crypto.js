@@ -67,8 +67,6 @@ async function getPublicKey(privateKey) {
     ["sign", "verify"]
   );
 
-  console.log(privateKey, keys.privateKey);
-
   // export private key to JWK
   const jwk = await crypto.subtle
     .exportKey("jwk", privateKey)
@@ -91,24 +89,20 @@ async function getPublicKey(privateKey) {
     []
   );
 
-  console.log(publicKey);
 
   function ab2str(buf) {
     return String.fromCharCode.apply(null, new Uint8Array(buf));
   }
 
   async function exportCryptoKey(publicKey) {
-    console.log("HELL");
     const exported = await window.crypto.subtle
       .exportKey("spki", publicKey)
       .catch((err) => console.error(err));
-    console.log("Exported", exported);
 
     const exportedAsString = ab2str(exported);
     const exportedAsBase64 = window.btoa(exportedAsString);
     const pemExported = { exportedAsBase64 };
 
-    console.log(pemExported);
   }
   return await exportCryptoKey(publicKey);
 }
@@ -122,13 +116,11 @@ async function getPublicKeyAsText(publicKey) {
   const exported = await window.crypto.subtle
     .exportKey("spki", publicKey)
     .catch((err) => console.error(err));
-  console.log("Exported", exported);
 
   const exportedAsString = ab2str(exported);
   const exportedAsBase64 = window.btoa(exportedAsString);
   const pemExported = { exportedAsBase64 };
 
-  console.log(pemExported);
   return pemExported;
 }
 
