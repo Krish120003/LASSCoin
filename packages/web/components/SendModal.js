@@ -2,16 +2,17 @@ import { useState } from "react";
 import { generateUUID4String, signMessage } from "../util/Crypto";
 import styles from "../styles/SendModal.module.scss";
 import React from "react";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 
 function SendModal(props) {
   const [target, setTarget] = useState("");
   const [amount, setAmount] = useState(0);
+  const dispatch = useDispatch();
 
   const createTransaction = async () => {
     const API_URL = "https://lasscoin.herokuapp.com/api";
 
-    const id = "a31c1ead-52c8-41b9-b24b-e1e79f443c7d"; //generateUUID4String();
+    const id = generateUUID4String();
     const sender = props.public_key;
     const value = parseFloat(amount);
     const message = `${id}|${sender}|${target}|${value.toFixed(15)}`;
@@ -25,9 +26,16 @@ function SendModal(props) {
     };
     const res = await fetch(API_URL + "/transactions/", {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify(data),
     });
-    console.log(JSON.stringify(data), res, await res.json());
+    dispatch({ type: "GET_TRANSACTIONS" });
+    dispatch({ type: "GET_HEIGHT" });
+    dispatch({ type: "GET_PENDING" });
+    dispatch({ type: "GET_BALANCE_DETAILS" });
+    props.setOpen();
   };
 
   return (
