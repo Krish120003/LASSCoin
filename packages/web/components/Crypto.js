@@ -1,5 +1,6 @@
 import { useState, useEffect, useHistory } from "react";
 import "crypto";
+import uuid4 from "uuid4";
 
 
 async function FileProcessor(priv_key) {
@@ -24,6 +25,7 @@ async function FileProcessor(priv_key) {
 
 function generateUUID4String () {
     // return uuid
+
 }
 
 function importPrivateKey(privateKeyText) {
@@ -57,42 +59,81 @@ function importPrivateKey(privateKeyText) {
 
 async function getPublicKey(privateKey) {
     // return CryptoKey object
-    const keys = await crypto.subtle.generateKey(
-        {
-          name: "RSASSA-PKCS1-v1_5",
-          modulusLength: 2048,
-          publicExponent: new Uint8Array([0x01, 0x00, 0x01]),
-          hash: { name: "SHA-256" },
-        },
-        true,
-        ["sign", "verify"]
-      );
-  
-      console.log(privateKey, keys.privateKey)
-  
-      // export private key to JWK
-      const jwk = await crypto.subtle.exportKey("jwk", privateKey).catch(
-        err => console.error(err)
-      );
-  
-      // remove private data from JWK
-      delete jwk.d;
-      delete jwk.dp;
-      delete jwk.dq;
-      delete jwk.q;
-      delete jwk.qi;
-      jwk.key_ops = ["encrypt", "wrapKey"];
-  
-      // import public key
-      const publicKey = await crypto.subtle.importKey(
-        "jwk",
-        jwk,
-        { name: "RSASSA-PKCS1-v1_5", hash: "SHA-256" },
-        true,
-        []
-      );
+        const keys = await crypto.subtle.generateKey(
+          {
+            name: "RSASSA-PKCS1-v1_5",
+            modulusLength: 2048,
+            publicExponent: new Uint8Array([0x01, 0x00, 0x01]),
+            hash: { name: "SHA-256" },
+          },
+          true,
+          ["sign", "verify"]
+        );
+    
+        console.log(privateKey, keys.privateKey)
+    
+        // export private key to JWK
+        const jwk = await crypto.subtle.exportKey("jwk", privateKey).catch(
+          err => console.error(err)
+        );
+    
+        // remove private data from JWK
+        delete jwk.d;
+        delete jwk.dp;
+        delete jwk.dq;
+        delete jwk.q;
+        delete jwk.qi;
+        jwk.key_ops = ["encrypt", "wrapKey"];
+    
+        // import public key
+        const publicKey = await crypto.subtle.importKey(
+          "jwk",
+          jwk,
+          { name: "RSASSA-PKCS1-v1_5", hash: "SHA-256" },
+          true,
+          []
+        );
+    
+        console.log(publicKey);
+    
+        function ab2str(buf) {
+          return String.fromCharCode.apply(null, new Uint8Array(buf));
+        }
+    
+        async function exportCryptoKey(publicKey) {
+          console.log("HELL");
+          const exported = await window.crypto.subtle
+            .exportKey("spki", publicKey)
+            .catch((err) => console.error(err));
+          console.log("Exported", exported);
+    
+          const exportedAsString = ab2str(exported);
+          const exportedAsBase64 = window.btoa(exportedAsString);
+          const pemExported = { exportedAsBase64 };
+    
+          console.log(pemExported);
+        }
+        await exportCryptoKey(publicKey);
 }
 
-function getPublicKeyAsText(publicKey) {
+
+function ab2str(buf) {
+    return String.fromCharCode.apply(null, new Uint8Array(buf));
+  }
+
+
+async function getPublicKeyAsText(publicKey) {
     // return string
-}
+    const exported = await window.crypto.subtle
+        .exportKey("spki", publicKey)
+        .catch((err) => console.error(err));
+      console.log("Exported", exported);
+
+      const exportedAsString = ab2str(exported);
+      const exportedAsBase64 = window.btoa(exportedAsString);
+      const pemExported = { exportedAsBase64 };
+
+      console.log(pemExported);
+    }
+    await exportCryptoKey(publicKey);
+  }
