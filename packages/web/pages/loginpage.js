@@ -5,7 +5,7 @@ import styles from "../styles/index.module.scss";
 import BalanceCard from "../components/BalanceCard";
 import StatStack from "../components/StatStack";
 import FileUploader from "../components/FileUploader";
-//import Crypto from "../components/Crypto";
+import Crypto from "../components/Crypto";
 
 
 export default function Home() {
