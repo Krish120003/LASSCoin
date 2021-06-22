@@ -1,4 +1,4 @@
-import { importPrivateKey } from "../util/Crypto";
+import { importPrivateKey, generatePrivateKey, exportPrivatePem} from "../util/Crypto";
 import { useDispatch } from "react-redux";
 import { saveAs } from 'file-saver';
 
@@ -17,10 +17,12 @@ export default function LoadCreateKey() {
     file_reader.readAsText(event.target.files[0]);
   };
 
-  function saveStaticDataToFile() {
-    var blob = new Blob(["Who's レム？"],
-        { type: "text/plain;charset=utf-8" });
-    saveAs(blob, "private.key"); 
+  const create_key = async () => {
+    const key = await generatePrivateKey();
+    const keyPem = await exportPrivatePem(key);
+    const blob = new Blob([keyPem],{ type: "text/plain;charset=utf-8" });
+    saveAs(blob, "private.key")
+    setInterval(() => {dispatch({ type: "SET_PRIV_KEY", payload: { key: key } })}, 1000)
   } 
 
   return (
@@ -54,7 +56,7 @@ export default function LoadCreateKey() {
           ></input>
         </div>
         <div className={styles.create_btn} 
-          onClick={() => {saveStaticDataToFile()}}>
+          onClick={() => {create_key()}}>
           <span
             className="iconify"
             data-icon="ic:outline-vpn-key"
