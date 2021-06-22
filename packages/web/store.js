@@ -47,15 +47,37 @@ const fetcherMiddleware = (store) => (next) => (action) => {
       )}`;
     let mined_url =
       API_URL +
-      `/transactions/balance/?address=${encodeURIComponent(
+      `/transactions/balance/mined/?address=${encodeURIComponent(
         store.getState().public_key
       )}`;
     let received_url =
       API_URL +
-      `/transactions/balance/?address=${encodeURIComponent(
+      `/transactions/balance/received/?address=${encodeURIComponent(
         store.getState().public_key
       )}`;
-    console.log(balance_url);
+
+    fetch(balance_url).then((res) => {
+      res.json().then((data) => {
+        balance = data.balance;
+        fetch(mined_url).then((res) => {
+          res.json().then((data) => {
+            mined = data.balance;
+            fetch(received_url).then((res) => {
+              res.json().then((data) => {
+                received = data.balance;
+                action.payload = {
+                  ...action.payload,
+                  mined,
+                  balance,
+                  received,
+                };
+                next(action);
+              });
+            });
+          });
+        });
+      });
+    });
 
     //next(action)
   } else if (action.type == "SET_PRIV_KEY") {
