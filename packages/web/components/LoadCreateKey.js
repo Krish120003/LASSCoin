@@ -1,7 +1,14 @@
 import styles from "../styles/LoadCreateKey.module.scss";
 
 export default function LoadCreateKey() {
-  const load_key = () => {};
+  const load_key = async (event) => {
+    event.preventDefault();
+    const file_reader = new FileReader();
+    file_reader.onload = async (event) => {
+      console.log(event.target.result);
+    };
+    file_reader.readAsText(event.target.files[0]);
+  };
 
   return (
     <div className={styles.main}>
@@ -18,7 +25,7 @@ export default function LoadCreateKey() {
             }}
           >
             <span
-              class="iconify"
+              className="iconify"
               data-icon="bi:cloud-upload"
               data-inline="false"
             ></span>
@@ -28,11 +35,12 @@ export default function LoadCreateKey() {
             className={styles.hidden_cover_input}
             id="load_key_dialog"
             type="file"
+            onChange={(event) => {load_key(event)}}
           ></input>
         </div>
         <div className={styles.create_btn}>
           <span
-            class="iconify"
+            className="iconify"
             data-icon="ic:outline-vpn-key"
             data-inline="false"
           ></span>
