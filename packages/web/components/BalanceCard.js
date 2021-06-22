@@ -1,4 +1,4 @@
-import {useState} from "react";
+import { useState } from "react";
 import Modal from "react-modal";
 
 import styles from "../styles/Balance.module.scss";
@@ -8,7 +8,6 @@ import BalanceCardButton from "./BalanceCardButton";
 import ReceiveModal from "./ReceiveModal";
 
 export default function BalanceCard() {
-
   const [receiveModalOpen, setReceiveModalOpen] = useState(false);
   const [sendModalOpen, setSendModalOpen] = useState(false);
 
@@ -16,12 +15,21 @@ export default function BalanceCard() {
     <>
       <Modal
         isOpen={receiveModalOpen}
-        ariaHideApp={false} 
-        className={styles.modal_style} 
-        shouldCloseOnOverlayClick={true} 
+        ariaHideApp={false}
+        className={styles.modal_style}
+        shouldCloseOnOverlayClick={true}
         onRequestClose={() => setReceiveModalOpen(false)}
       >
         <ReceiveModal />
+      </Modal>
+      <Modal
+        isOpen={sendModalOpen}
+        ariaHideApp={false}
+        className={styles.modal_style}
+        shouldCloseOnOverlayClick={true}
+        onRequestClose={() => setSendModalOpen(false)}
+      >
+        x
       </Modal>
       <div className={`${styles.balance_card} flex_margin`}>
         <h3 className={styles.thold_title}>Balance Details</h3>
@@ -45,8 +53,20 @@ export default function BalanceCard() {
           </div>
         </div>
         <div className={styles.buttons}>
-          <BalanceCardButton value={"Receive"} red={false} onClick={() => {setReceiveModalOpen(true)}}/>
-          <BalanceCardButton value={"Send"} red={true} />
+          <BalanceCardButton
+            value={"Receive"}
+            red={false}
+            onClick={() => {
+              setReceiveModalOpen(true);
+            }}
+          />
+          <BalanceCardButton
+            value={"Send"}
+            red={true}
+            onClick={() => {
+              setSendModalOpen(true);
+            }}
+          />
         </div>
       </div>
     </>
