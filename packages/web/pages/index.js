@@ -24,7 +24,7 @@ function Home(props) {
         <title>LASSCoin Home</title>
       </Head>
       <Modal
-        isOpen={props.key == null}
+        isOpen={props.private_key == null}
         ariaHideApp={false}
         className={styles.modal_style}
       >
@@ -45,6 +45,6 @@ function Home(props) {
 }
 
 function mapStateToProps(state) {
-  return { key: state.private_key };
+  return {private_key: state.private_key};
 }
 export default connect(mapStateToProps)(Home);
