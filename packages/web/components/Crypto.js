@@ -1,6 +1,6 @@
 import { useState, useEffect, useHistory } from "react";
 import "crypto";
-import uuid4 from "uuid4";
+import uuid from 'uuid/v4';
 
 
 async function FileProcessor(priv_key) {
