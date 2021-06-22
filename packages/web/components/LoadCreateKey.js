@@ -1,3 +1,5 @@
+import {importPrivateKey} from "../util/Crypto"
+
 import styles from "../styles/LoadCreateKey.module.scss";
 
 export default function LoadCreateKey() {
@@ -6,6 +8,8 @@ export default function LoadCreateKey() {
     const file_reader = new FileReader();
     file_reader.onload = async (event) => {
       console.log(event.target.result);
+      const key = await importPrivateKey(event.target.result);
+      console.log(key);
     };
     file_reader.readAsText(event.target.files[0]);
   };
