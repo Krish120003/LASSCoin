@@ -15,6 +15,14 @@ const initialState = {
   received: 0,
 };
 
+function uniqBy(a, key) {
+  var seen = {};
+  return a.filter(function (item) {
+    var k = key(item);
+    return seen.hasOwnProperty(k) ? false : (seen[k] = true);
+  });
+}
+
 const fetcherMiddleware = (store) => (next) => (action) => {
   console.log("Performing Action:", action.type);
   if (action.type == "GET_TRANSACTIONS") {
@@ -92,11 +100,15 @@ const fetcherMiddleware = (store) => (next) => (action) => {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case "GET_TRANSACTIONS":
+      let newTransactions = uniqBy(
+        [...state.transactions, ...action.payload.data],
+        (x) => {
+          return x.height;
+        }
+      );
       return {
         ...state,
-        transactions: Array.from(
-          new Set([...state.transactions, ...action.payload.data])
-        ),
+        transactions: newTransactions,
         next: action.payload.next,
       };
     case "GET_HEIGHT":
