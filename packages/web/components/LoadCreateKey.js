@@ -10,7 +10,6 @@ export default function LoadCreateKey() {
     event.preventDefault();
     const file_reader = new FileReader();
     file_reader.onload = async (event) => {
-      console.log(event.target.result);
       const key = await importPrivateKey(event.target.result);
       dispatch({ type: "SET_PRIV_KEY", payload: { key: key } });
     };
