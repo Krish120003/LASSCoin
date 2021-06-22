@@ -1,6 +1,10 @@
-import { importPrivateKey, generatePrivateKey, exportPrivatePem} from "../util/Crypto";
+import {
+  importPrivateKey,
+  generatePrivateKey,
+  exportPrivatePem,
+} from "../util/Crypto";
 import { useDispatch } from "react-redux";
-import { saveAs } from 'file-saver';
+import { saveAs } from "file-saver";
 
 import styles from "../styles/LoadCreateKey.module.scss";
 
@@ -20,10 +24,12 @@ export default function LoadCreateKey() {
   const create_key = async () => {
     const key = await generatePrivateKey();
     const keyPem = await exportPrivatePem(key);
-    const blob = new Blob([keyPem],{ type: "text/plain;charset=utf-8" });
-    saveAs(blob, "private.key")
-    setInterval(() => {dispatch({ type: "SET_PRIV_KEY", payload: { key: key } })}, 1000)
-  } 
+    const blob = new Blob([keyPem], { type: "text/plain;charset=utf-8" });
+    saveAs(blob, "private.key");
+    setTimeout(() => {
+      dispatch({ type: "SET_PRIV_KEY", payload: { key: key } });
+    }, 1000);
+  };
 
   return (
     <div className={styles.main}>
@@ -55,8 +61,12 @@ export default function LoadCreateKey() {
             }}
           ></input>
         </div>
-        <div className={styles.create_btn} 
-          onClick={() => {create_key()}}>
+        <div
+          className={styles.create_btn}
+          onClick={() => {
+            create_key();
+          }}
+        >
           <span
             className="iconify"
             data-icon="ic:outline-vpn-key"
