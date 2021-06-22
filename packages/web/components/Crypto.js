@@ -1,6 +1,7 @@
 import { useState, useEffect, useHistory } from "react";
+import { v4 as uuidv4 } from "uuid";
+
 import "crypto";
-import uuid from 'uuid/v4';
 
 
 async function FileProcessor(priv_key) {
@@ -25,8 +26,8 @@ async function FileProcessor(priv_key) {
 
 function generateUUID4String () {
     // return uuid
-
-}
+    return uuidv4();
+  }
 
 function importPrivateKey(privateKeyText) {
     // return CryptoKey object
