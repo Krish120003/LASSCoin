@@ -1,4 +1,5 @@
 import { applyMiddleware, createStore } from "redux";
+import { getPublicKeyAsText } from "./util/Crypto";
 
 const API_URL = "https://lasscoin.herokuapp.com/api";
 
@@ -8,6 +9,7 @@ const initialState = {
   height: 0,
   pendingBlocks: 0,
   private_key: null,
+  public_key: null,
 };
 
 const fetcherMiddleware = (store) => (next) => (action) => {
@@ -57,6 +59,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         private_key: action.payload.key,
+        public_key: getPublicKeyAsText(action.payload.key)
       };
     default:
       return state;
