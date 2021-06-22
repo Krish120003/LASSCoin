@@ -1,5 +1,9 @@
 import { useState } from "react";
-import { generateUUID4String, digestMessage } from "../util/Crypto";
+import {
+  generateUUID4String,
+  digestMessage,
+  signMessage,
+} from "../util/Crypto";
 import styles from "../styles/SendModal.module.scss";
 import React from "react";
 import { connect } from "react-redux";
@@ -13,7 +17,9 @@ function SendModal(props) {
     const sender = props.public_key;
     const value = parseFloat(amount);
     const message = `${id}|${sender}|${target}|${value.toFixed(15)}`;
-    console.log(message, digestMessage(message));
+    const hash = await digestMessage(message);
+    const signature = signMessage(hash, props.private_key);
+    console.log(signature);
   };
 
   return (
