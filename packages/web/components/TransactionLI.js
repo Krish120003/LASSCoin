@@ -19,7 +19,7 @@ export default function TransactionLI(props) {
         </div>
       </span>
       <span className={styles.right}>
-        L$ {props.value ? props.value.toFixed(14) : ""}
+        L$ {props.value != null ? props.value.toFixed(14) : ""}
       </span>
     </li>
   );
