@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Modal from "react-modal";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, connect } from "react-redux";
 
 import styles from "../styles/index.module.scss";
 
@@ -11,7 +11,7 @@ import StatStack from "../components/StatStack";
 import TransactionDrawer from "../components/TransactionDrawer";
 import LoadCreateKey from "../components/LoadCreateKey";
 
-export default function Home() {
+function Home(props) {
   const dispatch = useDispatch();
 
   dispatch({ type: "GET_TRANSACTIONS" });
@@ -23,7 +23,11 @@ export default function Home() {
       <Head>
         <title>LASSCoin Home</title>
       </Head>
-      <Modal isOpen={true} ariaHideApp={false} className={styles.modal_style}>
+      <Modal
+        isOpen={props.key == null}
+        ariaHideApp={false}
+        className={styles.modal_style}
+      >
         <LoadCreateKey />
       </Modal>
       <div className={styles.layout}>
@@ -39,3 +43,8 @@ export default function Home() {
     </>
   );
 }
+
+function mapStateToProps(state) {
+  return { key: state.private_key };
+}
+export default connect(mapStateToProps)(Home);
