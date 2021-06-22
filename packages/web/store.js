@@ -10,6 +10,9 @@ const initialState = {
   pendingBlocks: 0,
   private_key: null,
   public_key: null,
+  mined: 0,
+  balance: 0,
+  received: 0,
 };
 
 const fetcherMiddleware = (store) => (next) => (action) => {
@@ -30,6 +33,18 @@ const fetcherMiddleware = (store) => (next) => (action) => {
     fetch(API_URL + "/transactions/pending/").then((res) => {
       res.json().then((data) => {
         next({ ...action, payload: data });
+      });
+    });
+  } else if (action.type == "GET_BALANCE_DETAILS") {
+    console.log(store.getState());
+    let balance = 0;
+    let mined = 0;
+    let received = 0;
+    fetch(
+      API_URL + `/transactions/balance/?address=${store.getState().public_key}`
+    ).then((res) => {
+      res.json().then((data) => {
+        balance = data.balance;
       });
     });
   } else if (action.type == "SET_PRIV_KEY") {
@@ -59,6 +74,13 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         pendingBlocks: action.payload.pending,
+      };
+    case "GET_BALANCE_DETAILS":
+      return {
+        ...state,
+        balance: action.payload.balance,
+        mined: action.payload.mined,
+        received: action.payload.received,
       };
     case "SET_PRIV_KEY":
       return {
