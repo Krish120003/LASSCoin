@@ -10,16 +10,26 @@ export default function SendModal() {
   return (
     <div className={styles.main}>
       <div className={styles.content}>
-        <input
-          type="text"
-          onChange={(e) => {
-            setTarget(e.target.value);
-          }}
-        ></input>
-        <input
-          type="number"
-          onChange={(e) => setAmount(e.target.value)}
-        ></input>
+        <h3 className={styles.title}>Send LASSCoin</h3>
+        <div className={styles.inputs}>
+          <label>
+            <p>Address</p>
+          </label>
+          <input
+            type="text"
+            onChange={(e) => {
+              setTarget(e.target.value);
+            }}
+          ></input>
+          <label>
+            <p>Amount</p>
+          </label>
+          <input
+            type="number"
+            onChange={(e) => setAmount(e.target.value)}
+            min={0}
+          ></input>
+        </div>
       </div>
     </div>
   );
