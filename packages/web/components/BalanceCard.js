@@ -30,7 +30,7 @@ export default function BalanceCard() {
         shouldCloseOnOverlayClick={true}
         onRequestClose={() => setSendModalOpen(false)}
       >
-        <SendModal />
+        <SendModal setOpen={() => setSendModalOpen(false)} />
       </Modal>
       <div className={`${styles.balance_card} flex_margin`}>
         <h3 className={styles.thold_title}>Balance Details</h3>

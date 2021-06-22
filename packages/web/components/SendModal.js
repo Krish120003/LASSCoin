@@ -3,7 +3,7 @@ import { useState } from "react";
 import styles from "../styles/SendModal.module.scss";
 import React from "react";
 
-export default function SendModal() {
+export default function SendModal(props) {
   const [target, setTarget] = useState("");
   const [amount, setAmount] = useState(0);
 
@@ -32,7 +32,9 @@ export default function SendModal() {
         </div>
         <div className={styles.buttons}>
           <div className={styles.send}>Send</div>
-          <div className={styles.close}>Cancel</div>
+          <div className={styles.close} onClick={() => props.setOpen()}>
+            Cancel
+          </div>
         </div>
       </div>
     </div>
