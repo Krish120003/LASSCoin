@@ -89,7 +89,6 @@ async function getPublicKey(privateKey) {
     []
   );
 
-
   function ab2str(buf) {
     return String.fromCharCode.apply(null, new Uint8Array(buf));
   }
@@ -101,8 +100,8 @@ async function getPublicKey(privateKey) {
 
     const exportedAsString = ab2str(exported);
     const exportedAsBase64 = window.btoa(exportedAsString);
-    const pemExported = { exportedAsBase64 };
-
+    const pemExported = exportedAsBase64;
+    return pemExported;
   }
   return await exportCryptoKey(publicKey);
 }
@@ -125,24 +124,21 @@ async function getPublicKeyAsText(publicKey) {
 }
 
 async function generatePrivateKey() {
-    const keys = await crypto.subtle.generateKey(
-        {
-          name: "RSASSA-PKCS1-v1_5",
-          modulusLength: 2048,
-          publicExponent: new Uint8Array([0x01, 0x00, 0x01]),
-          hash: { name: "SHA-256" },
-        },
-        true,
-        ["sign", "verify"]
-      );
-    return keys.privateKey;
+  const keys = await crypto.subtle.generateKey(
+    {
+      name: "RSASSA-PKCS1-v1_5",
+      modulusLength: 2048,
+      publicExponent: new Uint8Array([0x01, 0x00, 0x01]),
+      hash: { name: "SHA-256" },
+    },
+    true,
+    ["sign", "verify"]
+  );
+  return keys.privateKey;
 }
 
 async function exportPrivatePem(key) {
-  const exported = await window.crypto.subtle.exportKey(
-    "pkcs8",
-    key
-  );
+  const exported = await window.crypto.subtle.exportKey("pkcs8", key);
   const exportedAsString = ab2str(exported);
   const exportedAsBase64 = window.btoa(exportedAsString);
   const pemExported = `-----BEGIN PRIVATE KEY-----\n${exportedAsBase64}\n-----END PRIVATE KEY-----`;
@@ -155,5 +151,5 @@ module.exports = {
   getPublicKey,
   getPublicKeyAsText,
   generatePrivateKey,
-  exportPrivatePem
+  exportPrivatePem,
 };
