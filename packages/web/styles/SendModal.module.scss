@@ -44,6 +44,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
+}
+
+.close:hover {
+  border: 1px solid #333;
 }
 
 .send {
@@ -52,4 +57,9 @@
   color: white;
   border: none;
   background-color: var(--prim-color-1);
+}
+
+.send:hover {
+  border: none;
+  background-color: #433859;
 }
