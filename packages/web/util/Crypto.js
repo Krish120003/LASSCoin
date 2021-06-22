@@ -145,6 +145,15 @@ async function exportPrivatePem(key) {
   return pemExported;
 }
 
+async function signMessage(message, key) {
+  const sign_bytes = await crypto.subtle.sign(
+    "RSASSA-PKCS1-v1_5",
+    key,
+    Buffer.from(message)
+  );
+  return btoa(String.fromCharCode.apply(null, new Uint8Array(sign_bytes)));
+}
+
 module.exports = {
   generateUUID4String,
   importPrivateKey,
@@ -153,4 +162,5 @@ module.exports = {
   generatePrivateKey,
   exportPrivatePem,
   digestMessage,
+  signMessage,
 };
