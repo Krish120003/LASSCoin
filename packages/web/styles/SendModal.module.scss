@@ -29,3 +29,19 @@
     padding: 0.5em;
   }
 }
+
+.buttons {
+  display: flex;
+  float: right;
+}
+
+.close {
+  padding: 0.5em;
+  background-color: white;
+  border-radius: 0.25em;
+  border: 1px solid #bbb;
+}
+
+.send {
+  @extend .close;
+}

@@ -30,6 +30,10 @@ export default function SendModal() {
             min={0}
           ></input>
         </div>
+        <div className={styles.buttons}>
+          <div className={styles.close}>Cancel</div>
+          <div className={styles.send}>Send</div>
+        </div>
       </div>
     </div>
   );
