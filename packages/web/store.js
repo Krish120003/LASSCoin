@@ -105,7 +105,9 @@ const reducer = (state = initialState, action) => {
         (x) => {
           return x.height;
         }
-      );
+      ).sort((a, b) => {
+        a.height > b.height;
+      });
       return {
         ...state,
         transactions: newTransactions,
