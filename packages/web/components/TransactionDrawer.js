@@ -29,7 +29,16 @@ function TransactionDrawer(props) {
       </div>
       <ul className={styles.transactions}>
         {props.transactions.slice(0, 5).map((element) => {
-          return <TransactionLI key={element.uuid} {...element} />;
+          return (
+            <TransactionLI
+              key={element.uuid}
+              {...element}
+              self={
+                element.sender === props.public_key ||
+                element.target === props.public_key
+              }
+            />
+          );
         })}
       </ul>
     </div>
@@ -37,6 +46,6 @@ function TransactionDrawer(props) {
 }
 
 function mapStateToProps(state) {
-  return { transactions: state.transactions };
+  return { transactions: state.transactions, public_key: state.public_key };
 }
 export default connect(mapStateToProps)(TransactionDrawer);
