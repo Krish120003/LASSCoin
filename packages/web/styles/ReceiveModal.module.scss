@@ -55,4 +55,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: 0s;
+}
+
+.copy_button:hover {
+  background-color: #ddd;
+  transition: 0s;
+  cursor: pointer;
 }
