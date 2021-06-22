@@ -152,4 +152,5 @@ module.exports = {
   getPublicKeyAsText,
   generatePrivateKey,
   exportPrivatePem,
+  digestMessage,
 };
