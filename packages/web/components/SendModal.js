@@ -1,11 +1,20 @@
 import { useState } from "react";
-
+import { generateUUID4String, digestMessage } from "../util/Crypto";
 import styles from "../styles/SendModal.module.scss";
 import React from "react";
+import { connect } from "react-redux";
 
-export default function SendModal(props) {
+function SendModal(props) {
   const [target, setTarget] = useState("");
   const [amount, setAmount] = useState(0);
+
+  const createTransaction = async () => {
+    const id = generateUUID4String();
+    const sender = props.public_key;
+    const value = parseFloat(amount);
+    const message = `${id}|${sender}|${target}|${value.toFixed(15)}`;
+    console.log(message, digestMessage(message));
+  };
 
   return (
     <div className={styles.main}>
@@ -31,7 +40,9 @@ export default function SendModal(props) {
           ></input>
         </div>
         <div className={styles.buttons}>
-          <div className={styles.send}>Send</div>
+          <div className={styles.send} onClick={() => createTransaction()}>
+            Send
+          </div>
           <div className={styles.close} onClick={() => props.setOpen()}>
             Cancel
           </div>
@@ -40,3 +51,7 @@ export default function SendModal(props) {
     </div>
   );
 }
+function mapStateToProps(state) {
+  return state;
+}
+export default connect(mapStateToProps)(SendModal);
