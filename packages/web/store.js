@@ -36,7 +36,6 @@ const fetcherMiddleware = (store) => (next) => (action) => {
       });
     });
   } else if (action.type == "GET_BALANCE_DETAILS") {
-    console.log(store.getState());
     let balance = 0;
     let mined = 0;
     let received = 0;

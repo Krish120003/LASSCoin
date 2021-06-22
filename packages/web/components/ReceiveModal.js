@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import styles from "../styles/ReceiveModal.module.scss";
 
 function ReceiveModal(props) {
-  console.log(props);
   return (
     <div className={styles.main}>
       <div className={styles.content}>
