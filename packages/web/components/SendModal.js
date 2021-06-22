@@ -31,8 +31,8 @@ export default function SendModal() {
           ></input>
         </div>
         <div className={styles.buttons}>
-          <div className={styles.close}>Cancel</div>
           <div className={styles.send}>Send</div>
+          <div className={styles.close}>Cancel</div>
         </div>
       </div>
     </div>
