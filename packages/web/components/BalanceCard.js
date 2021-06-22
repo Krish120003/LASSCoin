@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Modal from "react-modal";
-
+import { connect } from "react-redux";
 import styles from "../styles/Balance.module.scss";
 
 import TextColumnGroup from "./TextColumnGroup";
@@ -8,9 +8,11 @@ import BalanceCardButton from "./BalanceCardButton";
 import ReceiveModal from "./ReceiveModal";
 import SendModal from "./SendModal";
 
-export default function BalanceCard() {
+function BalanceCard(props) {
   const [receiveModalOpen, setReceiveModalOpen] = useState(false);
   const [sendModalOpen, setSendModalOpen] = useState(false);
+
+  console.log("x", props, props.balance);
 
   return (
     <>
@@ -38,7 +40,7 @@ export default function BalanceCard() {
           <TextColumnGroup
             class={styles.main_text_column}
             title="Current Balance"
-            value={2.25002}
+            value={props.balance}
           />
           <div className={styles.flex_split}>
             <TextColumnGroup
@@ -73,3 +75,8 @@ export default function BalanceCard() {
     </>
   );
 }
+
+function mapStateToProps(state) {
+  return { balance: state.balance };
+}
+export default connect(mapStateToProps)(BalanceCard);
