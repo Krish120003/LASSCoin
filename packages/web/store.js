@@ -40,13 +40,24 @@ const fetcherMiddleware = (store) => (next) => (action) => {
     let balance = 0;
     let mined = 0;
     let received = 0;
-    fetch(
-      API_URL + `/transactions/balance/?address=${store.getState().public_key}`
-    ).then((res) => {
-      res.json().then((data) => {
-        balance = data.balance;
-      });
-    });
+    let balance_url =
+      API_URL +
+      `/transactions/balance/?address=${encodeURIComponent(
+        store.getState().public_key
+      )}`;
+    let mined_url =
+      API_URL +
+      `/transactions/balance/?address=${encodeURIComponent(
+        store.getState().public_key
+      )}`;
+    let received_url =
+      API_URL +
+      `/transactions/balance/?address=${encodeURIComponent(
+        store.getState().public_key
+      )}`;
+    console.log(balance_url);
+
+    //next(action)
   } else if (action.type == "SET_PRIV_KEY") {
     getPublicKey(action.payload.key).then((res) => {
       action.payload = { ...action.payload, public_key: res };
