@@ -26,7 +26,29 @@ function uniqBy(a, key) {
 const fetcherMiddleware = (store) => (next) => (action) => {
   console.log("Performing Action:", action.type);
   if (action.type == "GET_TRANSACTIONS") {
-    fetch(API_URL + "/transactions/").then((res) => {
+    const state = { ...store.getState() };
+
+    if (state.height == state.transactions.length) {
+      return;
+    } else {
+      if (
+        state.nextTransaction == "GENESIS" &&
+        state.height == state.transactions.length
+      ) {
+        return;
+      }
+    }
+    const FETCH_URL =
+      API_URL +
+      `/transactions/?next=${
+        state.nextTransaction != null
+          ? state.nextTransaction == "GENESIS"
+            ? ""
+            : state.nextTransaction
+          : ""
+      }`;
+
+    fetch(FETCH_URL).then((res) => {
       res.json().then((data) => {
         next({ ...action, payload: data });
       });
@@ -111,7 +133,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         transactions: newTransactions,
-        next: action.payload.next,
+        nextTransaction: action.payload.next,
       };
     case "GET_HEIGHT":
       return {
