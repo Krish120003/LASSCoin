@@ -45,7 +45,7 @@ function TransactionDrawer(props) {
             }
           })
           .sort((a, b) => {
-            return a.height > b.height;
+            return parseInt(b.height) - parseInt(a.height);
           })
           .slice(0, props.full ? props.transactions.length : 5)
           .map((element) => {

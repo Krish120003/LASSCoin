@@ -128,7 +128,7 @@ const reducer = (state = initialState, action) => {
           return x.height;
         }
       ).sort((a, b) => {
-        a.height > b.height;
+        return parseInt(b.height) - parseInt(a.height);
       });
       return {
         ...state,
