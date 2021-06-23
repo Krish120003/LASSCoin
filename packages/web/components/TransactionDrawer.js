@@ -6,7 +6,6 @@ import styles from "../styles/TransactionDrawer.module.scss";
 import TransactionLI from "./TransactionLI";
 
 function TransactionDrawer(props) {
-  console.log(props);
   const [filter, setFilter] = useState(false);
   return (
     <div className={props.full ? styles.full : styles.main}>
