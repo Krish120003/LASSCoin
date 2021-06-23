@@ -44,7 +44,7 @@ function TransactionDrawer(props) {
               );
             }
           })
-          .slice(0, 5)
+          .slice(0, props.full ? props.transactions.length : 5)
           .map((element) => {
             return (
               <TransactionLI
