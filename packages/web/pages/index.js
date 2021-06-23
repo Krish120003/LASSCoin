@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Modal from "react-modal";
 
+import { useEffect } from "react";
 import { useDispatch, connect } from "react-redux";
 
 import styles from "../styles/index.module.scss";
@@ -19,12 +20,18 @@ function Home(props) {
   dispatch({ type: "GET_PENDING" });
   dispatch({ type: "GET_BALANCE_DETAILS" });
 
-  setInterval(() => {
-    dispatch({ type: "GET_TRANSACTIONS" });
-    dispatch({ type: "GET_HEIGHT" });
-    dispatch({ type: "GET_PENDING" });
-    dispatch({ type: "GET_BALANCE_DETAILS" });
-  }, 10000);
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      dispatch({ type: "GET_TRANSACTIONS" });
+      dispatch({ type: "GET_HEIGHT" });
+      dispatch({ type: "GET_PENDING" });
+      dispatch({ type: "GET_BALANCE_DETAILS" });
+    }, 10000);
+    return () => {
+      console.log("Unmounting");
+      clearInterval(intervalId);
+    };
+  }, []);
 
   return (
     <>
