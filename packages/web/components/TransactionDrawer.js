@@ -8,7 +8,7 @@ import TransactionLI from "./TransactionLI";
 function TransactionDrawer(props) {
   const [filter, setFilter] = useState(false);
   return (
-    <div className={styles.main}>
+    <div className={props.full ? styles.full : styles.main}>
       <div className={styles.option_container}>
         <span
           className={filter ? "" : styles.active_option}
@@ -27,7 +27,13 @@ function TransactionDrawer(props) {
           My Transactions
         </span>
       </div>
-      <ul className={styles.transactions}>
+      <ul
+        className={
+          styles.transactions +
+          " " +
+          (styles.full ? styles.transactions_full : "")
+        }
+      >
         {props.transactions
           .filter((t) => {
             if (!filter) {
