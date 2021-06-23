@@ -1,4 +1,5 @@
 import Router from "next/router";
+import Link from "next/link";
 import { useState } from "react";
 import styles from "../styles/Sidebar.module.scss";
 
@@ -17,11 +18,15 @@ export default function Sidebar() {
           style={{ color: "#5C4E7A" }}
         ></span>
       </div>
-      <SidebarButton iconName="akar-icons:home" active={currentPage == 0} />
-      <SidebarButton
-        iconName="radix-icons:activity-log"
-        active={currentPage == 1}
-      />
+      <Link href="/">
+        <SidebarButton iconName="akar-icons:home" active={currentPage == 0} />
+      </Link>
+      <Link href="/transactions/">
+        <SidebarButton
+          iconName="radix-icons:activity-log"
+          active={currentPage == 1}
+        />
+      </Link>
       <div className={styles.spacer}></div>
       <SidebarButton
         iconName="bx:bx-log-out"
