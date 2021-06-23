@@ -44,6 +44,9 @@ function TransactionDrawer(props) {
               );
             }
           })
+          .sort((a, b) => {
+            return a.height > b.height;
+          })
           .slice(0, props.full ? props.transactions.length : 5)
           .map((element) => {
             return (
