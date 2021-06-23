@@ -28,7 +28,6 @@ function Home(props) {
       dispatch({ type: "GET_BALANCE_DETAILS" });
     }, 10000);
     return () => {
-      console.log("Unmounting");
       clearInterval(intervalId);
     };
   }, []);
