@@ -52,7 +52,7 @@ function Home(props) {
           <StatStack />
         </div>
         <div>
-          <TransactionDrawer />
+          <TransactionDrawer full={false} />
         </div>
       </div>
     </>

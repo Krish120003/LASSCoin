@@ -6,6 +6,7 @@ import styles from "../styles/TransactionDrawer.module.scss";
 import TransactionLI from "./TransactionLI";
 
 function TransactionDrawer(props) {
+  console.log(props);
   const [filter, setFilter] = useState(false);
   return (
     <div className={props.full ? styles.full : styles.main}>
@@ -31,7 +32,7 @@ function TransactionDrawer(props) {
         className={
           styles.transactions +
           " " +
-          (styles.full ? styles.transactions_full : "")
+          (props.full ? styles.transactions_full : "")
         }
       >
         {props.transactions
