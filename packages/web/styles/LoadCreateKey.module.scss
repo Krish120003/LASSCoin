@@ -1,0 +1,123 @@
+.main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  flex-direction: column;
+  //margin-top: -5vh;
+}
+
+.title_div {
+  background-color: red;
+  font-family: "Archivo Black", sans-serif;
+  font-size: 3em;
+  font-weight: 400;
+  text-align: left;
+  margin-bottom: 2rem;
+  width: 50rem;
+
+  background-image: gradient(
+    linear,
+    left top,
+    right top,
+    color-stop(0, #f22),
+    color-stop(0.15, #f2f),
+    color-stop(0.3, #22f),
+    color-stop(0.45, #2ff),
+    color-stop(0.6, #2f2),
+    color-stop(0.75, #2f2),
+    color-stop(0.9, #ff2),
+    color-stop(1, #f22)
+  );
+
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: hue 10s infinite linear;
+}
+
+.content {
+  text-align: center;
+  width: 50rem;
+  height: 30em;
+  border-radius: 3em;
+  background-color: white;
+  box-shadow: 0 0 4em rgba($color: #000000, $alpha: 0.2);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1em 2.5em;
+}
+
+@keyframes hue {
+  from {
+    -webkit-filter: hue-rotate(0deg);
+  }
+  to {
+    -webkit-filter: hue-rotate(-360deg);
+  }
+}
+
+.btn {
+  height: 90%;
+  width: 47.5%;
+  border-radius: 2rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  color: white;
+  font-size: 2em;
+  svg {
+    margin-top: 4rem;
+    width: 14rem;
+    height: 14rem;
+  }
+  h3 {
+    margin-bottom: 3rem;
+  }
+}
+
+.btn:hover {
+  box-shadow: 1px 1px 0.3em rgba($color: #000000, $alpha: 0.2);
+}
+
+.load_btn {
+  height: 90%;
+  width: 47.5%;
+  border-radius: 2rem;
+  background-color: var(--secondary-color-2);
+}
+.load_btn:hover {
+  box-shadow: 1px 1px 0.3em rgba($color: #000000, $alpha: 0.2);
+}
+
+.create_btn {
+  @extend .btn;
+  background-color: #7c68a6;
+}
+
+.hidden_cover_input {
+  height: 0%;
+  width: 0%;
+  position: relative;
+  display: none;
+}
+
+.load_btn_content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 2em;
+  color: white;
+  svg {
+    margin-top: 4rem;
+    width: 14rem;
+    height: 14rem;
+  }
+  h3 {
+    margin-bottom: 3rem;
+  }
+}

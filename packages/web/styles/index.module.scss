@@ -1,7 +1,20 @@
 .layout {
   padding: 8em;
+  padding-left: 12em;
+}
+
+.layout_t {
+  padding: 6em;
+  padding-top: 8em;
+  padding-left: 12em;
 }
 
 .top_section {
   display: flex;
+}
+
+.modal_style {
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(1.5em);
 }

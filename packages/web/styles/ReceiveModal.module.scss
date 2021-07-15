@@ -1,0 +1,65 @@
+.main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  flex-direction: column;
+}
+
+.center {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.content {
+  pointer-events: all;
+  background-color: white;
+  width: 50%;
+  height: 15em;
+  border-radius: 3em;
+  box-shadow: 0 0 4em rgba($color: #000000, $alpha: 0.2);
+  padding: 2.5rem;
+  display: flex;
+
+  h3 {
+    margin-top: 0;
+    font-weight: 500;
+    font-size: 1.25em;
+  }
+  p {
+    color: #777;
+    margin-bottom: 0;
+  }
+}
+
+.address_box {
+  border: 1px solid #bbb;
+  border-radius: 0.25em;
+  display: flex;
+}
+
+.key_box {
+  width: 90%;
+  padding: 0.5rem;
+  overflow-x: scroll;
+}
+
+.copy_button {
+  text-align: center;
+  width: 10%;
+  background-color: #eee;
+  padding: 0.5rem;
+  border-left: solid 1px #bbb;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0s;
+}
+
+.copy_button:hover {
+  background-color: #ddd;
+  transition: 0s;
+  cursor: pointer;
+}

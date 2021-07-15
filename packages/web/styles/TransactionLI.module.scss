@@ -1,0 +1,61 @@
+.main {
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1em;
+  margin-bottom: 2em;
+  color: var(--prim-color-1);
+}
+
+.main_self {
+  @extend .main;
+  color: var(--secondary-color-2);
+}
+
+.left {
+  display: flex;
+  h6 {
+    font-weight: 500;
+    margin: 0;
+    font-size: 1.2em;
+  }
+  p {
+    margin: 0;
+    font-size: 0.8em;
+  }
+  svg {
+    padding: 0.4em;
+    height: 2em;
+    width: 2em;
+  }
+}
+
+.left_text {
+  margin-left: 1.5em;
+}
+
+.icon {
+  background-color: #f1f1f1;
+  border-radius: 0.3em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 2.5em;
+  width: 2.5em;
+}
+
+.organe_icon {
+  background-color: #fff3f1;
+  border-radius: 0.3em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 2.5em;
+  width: 2.5em;
+}
+
+.right {
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+}
